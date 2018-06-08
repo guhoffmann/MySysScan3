@@ -1,0 +1,1786 @@
+{
+"Actions ATM7029":   {
+"soc_name": "Actions ATM7029",
+"chipset_model": "7029",
+"chipset_series": "cpuinfo_arm_chipset_series_actions_atm",
+"gpu_name": "Vivante GC1000",
+"gpu_model": "1000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"Actions ATM7029B":   {
+"soc_name": "Actions ATM7029B",
+"chipset_model": "7029",
+"chipset_series": "cpuinfo_arm_chipset_series_actions_atm",
+"gpu_name": "PowerVR SGX 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Allwinner A10":   {
+"soc_name": "Allwinner A10",
+"chipset_model": "10",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Allwinner A13":   {
+"soc_name": "Allwinner A13",
+"chipset_model": "13",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Allwinner A20":   {
+"soc_name": "Allwinner A20",
+"chipset_model": "20",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Allwinner A23":   {
+"soc_name": "Allwinner A23",
+"chipset_model": "23",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Allwinner A31":   {
+"soc_name": "Allwinner A31",
+"chipset_model": "31",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Allwinner A33":   {
+"soc_name": "Allwinner A33",
+"chipset_model": "33",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Allwinner A80":   {
+"soc_name": "Allwinner A80",
+"chipset_model": "80",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "PowerVR Rogue G6230",
+"gpu_model": "6230",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_g"
+},
+"Allwinner A83T":   {
+"soc_name": "Allwinner A83T",
+"chipset_model": "83",
+"chipset_series": "cpuinfo_arm_chipset_series_allwinner_a",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Amlogic AML8726*":   {
+"soc_name": "Amlogic AML8726*",
+"chipset_model": "8726",
+"chipset_series": "cpuinfo_arm_chipset_series_amlogic_aml",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Amlogic S805":   {
+"soc_name": "Amlogic S805",
+"chipset_model": "805",
+"chipset_series": "cpuinfo_arm_chipset_series_amlogic_s",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Amlogic S812":   {
+"soc_name": "Amlogic S812",
+"chipset_model": "812",
+"chipset_series": "cpuinfo_arm_chipset_series_amlogic_s",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Amlogic S905*":   {
+"soc_name": "Amlogic S905*",
+"chipset_model": "905",
+"chipset_series": "cpuinfo_arm_chipset_series_amlogic_s",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Amlogic S912":   {
+"soc_name": "Amlogic S912",
+"chipset_model": "912",
+"chipset_series": "cpuinfo_arm_chipset_series_amlogic_s",
+"gpu_name": "ARM Mali-T820",
+"gpu_model": "820",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Broadcom BCM21654*":   {
+"soc_name": "Broadcom BCM21654*",
+"chipset_model": "21654",
+"chipset_series": "cpuinfo_arm_chipset_series_broadcom_bcm",
+"gpu_name": "Broadcom VideoCore IV",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_broadcom_videocore"
+},
+"Broadcom BCM21663":   {
+"soc_name": "Broadcom BCM21663",
+"chipset_model": "21663",
+"chipset_series": "cpuinfo_arm_chipset_series_broadcom_bcm",
+"gpu_name": "Broadcom VideoCore IV",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_broadcom_videocore"
+},
+"Broadcom BCM21664*":   {
+"soc_name": "Broadcom BCM21664*",
+"chipset_model": "21664",
+"chipset_series": "cpuinfo_arm_chipset_series_broadcom_bcm",
+"gpu_name": "Broadcom VideoCore IV",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_broadcom_videocore"
+},
+"Broadcom BCM23550":   {
+"soc_name": "Broadcom BCM23550",
+"chipset_model": "23550",
+"chipset_series": "cpuinfo_arm_chipset_series_broadcom_bcm",
+"gpu_name": "Broadcom VideoCore IV",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_broadcom_videocore"
+},
+"Broadcom BCM28155":   {
+"soc_name": "Broadcom BCM28155",
+"chipset_model": "28155",
+"chipset_series": "cpuinfo_arm_chipset_series_broadcom_bcm",
+"gpu_name": "Broadcom VideoCore IV",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_broadcom_videocore"
+},
+"HiSilicon Hi3751":   {
+"soc_name": "HiSilicon Hi3751",
+"chipset_model": "3751",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_hi",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"HiSilicon K3V2":   {
+"soc_name": "HiSilicon K3V2",
+"chipset_model": "2",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_k3v",
+"gpu_name": "Vivante GC4000",
+"gpu_model": "4000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"HiSilicon Kirin 620":   {
+"soc_name": "HiSilicon Kirin 620",
+"chipset_model": "620",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"HiSilicon Kirin 650":   {
+"soc_name": "HiSilicon Kirin 650",
+"chipset_model": "650",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T830",
+"gpu_model": "830",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 659":   {
+"soc_name": "HiSilicon Kirin 659",
+"chipset_model": "659",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T830",
+"gpu_model": "830",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 910T":   {
+"soc_name": "HiSilicon Kirin 910T",
+"chipset_model": "910",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"HiSilicon Kirin 920":   {
+"soc_name": "HiSilicon Kirin 920",
+"chipset_model": "920",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T624",
+"gpu_model": "624",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 925":   {
+"soc_name": "HiSilicon Kirin 925",
+"chipset_model": "925",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T624",
+"gpu_model": "624",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 930":   {
+"soc_name": "HiSilicon Kirin 930",
+"chipset_model": "930",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T624",
+"gpu_model": "624",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 935":   {
+"soc_name": "HiSilicon Kirin 935",
+"chipset_model": "935",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T624",
+"gpu_model": "624",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 950":   {
+"soc_name": "HiSilicon Kirin 950",
+"chipset_model": "950",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T880",
+"gpu_model": "880",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 955":   {
+"soc_name": "HiSilicon Kirin 955",
+"chipset_model": "955",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-T880",
+"gpu_model": "880",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"HiSilicon Kirin 960":   {
+"soc_name": "HiSilicon Kirin 960",
+"chipset_model": "960",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-G71",
+"gpu_model": "71",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"HiSilicon Kirin 970":   {
+"soc_name": "HiSilicon Kirin 970",
+"chipset_model": "970",
+"chipset_series": "cpuinfo_arm_chipset_series_hisilicon_kirin",
+"gpu_name": "ARM Mali-G72",
+"gpu_model": "72",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"LG Nuclun 7111":   {
+"soc_name": "LG Nuclun 7111",
+"chipset_model": "7111",
+"chipset_series": "cpuinfo_arm_chipset_series_lg_nuclun",
+"gpu_name": "PowerVR Rogue G6430",
+"gpu_model": "6430",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_g"
+},
+"Leadcore LC1860":   {
+"soc_name": "Leadcore LC1860",
+"chipset_model": "1860",
+"chipset_series": "cpuinfo_arm_chipset_series_leadcore_lc",
+"gpu_name": "ARM Mali-T622",
+"gpu_model": "622",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MStar 6A338":   {
+"soc_name": "MStar 6A338",
+"chipset_model": "338",
+"chipset_series": "cpuinfo_arm_chipset_series_mstar_6a",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Marvell PXA1088":   {
+"soc_name": "Marvell PXA1088",
+"chipset_model": "1088",
+"chipset_series": "cpuinfo_arm_chipset_series_marvell_pxa",
+"gpu_name": "Vivante GC1000",
+"gpu_model": "1000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"Marvell PXA1908":   {
+"soc_name": "Marvell PXA1908",
+"chipset_model": "1908",
+"chipset_series": "cpuinfo_arm_chipset_series_marvell_pxa",
+"gpu_name": "Vivante GC7000UL",
+"gpu_model": "7000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"Marvell PXA1928":   {
+"soc_name": "Marvell PXA1928",
+"chipset_model": "1928",
+"chipset_series": "cpuinfo_arm_chipset_series_marvell_pxa",
+"gpu_name": "Vivante GC5000",
+"gpu_model": "5000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"Marvell PXA986":   {
+"soc_name": "Marvell PXA986",
+"chipset_model": "986",
+"chipset_series": "cpuinfo_arm_chipset_series_marvell_pxa",
+"gpu_name": "Vivante GC1000",
+"gpu_model": "1000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"Marvell PXA988":   {
+"soc_name": "Marvell PXA988",
+"chipset_model": "988",
+"chipset_series": "cpuinfo_arm_chipset_series_marvell_pxa",
+"gpu_name": "Vivante GC1000",
+"gpu_model": "1000",
+"gpu_series": "cpuinfo_android_gpu_series_vivante_gc"
+},
+"MediaTek MT5507":   {
+"soc_name": "MediaTek MT5507",
+"chipset_model": "5507",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT5508":   {
+"soc_name": "MediaTek MT5508",
+"chipset_model": "5508",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT5863":   {
+"soc_name": "MediaTek MT5863",
+"chipset_model": "5863",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT5891":   {
+"soc_name": "MediaTek MT5891",
+"chipset_model": "5891",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6517":   {
+"soc_name": "MediaTek MT6517",
+"chipset_model": "6517",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 531",
+"gpu_model": "531",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT6570":   {
+"soc_name": "MediaTek MT6570",
+"chipset_model": "6570",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6571":   {
+"soc_name": "MediaTek MT6571",
+"chipset_model": "6571",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6572*":   {
+"soc_name": "MediaTek MT6572*",
+"chipset_model": "6572",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6575":   {
+"soc_name": "MediaTek MT6575",
+"chipset_model": "6575",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 531",
+"gpu_model": "531",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT6580*":   {
+"soc_name": "MediaTek MT6580*",
+"chipset_model": "6580",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6581":   {
+"soc_name": "MediaTek MT6581",
+"chipset_model": "6581",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6582*":   {
+"soc_name": "MediaTek MT6582*",
+"chipset_model": "6582",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6588":   {
+"soc_name": "MediaTek MT6588",
+"chipset_model": "6588",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6591":   {
+"soc_name": "MediaTek MT6591",
+"chipset_model": "6591",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT6732*":   {
+"soc_name": "MediaTek MT6732*",
+"chipset_model": "6732",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6735*":   {
+"soc_name": "MediaTek MT6735*",
+"chipset_model": "6735",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6737*":   {
+"soc_name": "MediaTek MT6737*",
+"chipset_model": "6737",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6738":   {
+"soc_name": "MediaTek MT6738",
+"chipset_model": "6738",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6750*":   {
+"soc_name": "MediaTek MT6750*",
+"chipset_model": "6750",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6752*":   {
+"soc_name": "MediaTek MT6752*",
+"chipset_model": "6752",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6753*":   {
+"soc_name": "MediaTek MT6753*",
+"chipset_model": "6753",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6755*":   {
+"soc_name": "MediaTek MT6755*",
+"chipset_model": "6755",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6757*":   {
+"soc_name": "MediaTek MT6757*",
+"chipset_model": "6757",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T880",
+"gpu_model": "880",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6758*":   {
+"soc_name": "MediaTek MT6758*",
+"chipset_model": "6758",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-G71",
+"gpu_model": "71",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"MediaTek MT6763":   {
+"soc_name": "MediaTek MT6763",
+"chipset_model": "6763",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-G71",
+"gpu_model": "71",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"MediaTek MT6795*":   {
+"soc_name": "MediaTek MT6795*",
+"chipset_model": "6795",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue G6200",
+"gpu_model": "6200",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_g"
+},
+"MediaTek MT6797*":   {
+"soc_name": "MediaTek MT6797*",
+"chipset_model": "6797",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T880",
+"gpu_model": "880",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT6799":   {
+"soc_name": "MediaTek MT6799",
+"chipset_model": "6799",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue GT7400+",
+"gpu_model": "7400",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_gt"
+},
+"MediaTek MT8111":   {
+"soc_name": "MediaTek MT8111",
+"chipset_model": "8111",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8121":   {
+"soc_name": "MediaTek MT8121",
+"chipset_model": "8121",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8125":   {
+"soc_name": "MediaTek MT8125",
+"chipset_model": "8125",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT8127":   {
+"soc_name": "MediaTek MT8127",
+"chipset_model": "8127",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8135":   {
+"soc_name": "MediaTek MT8135",
+"chipset_model": "8135",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue G6200",
+"gpu_model": "6200",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_g"
+},
+"MediaTek MT8151":   {
+"soc_name": "MediaTek MT8151",
+"chipset_model": "8151",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8161*":   {
+"soc_name": "MediaTek MT8161*",
+"chipset_model": "8161",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8163":   {
+"soc_name": "MediaTek MT8163",
+"chipset_model": "8163",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8165":   {
+"soc_name": "MediaTek MT8165",
+"chipset_model": "8165",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8167*":   {
+"soc_name": "MediaTek MT8167*",
+"chipset_model": "8167",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue GE8300",
+"gpu_model": "8300",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_ge"
+},
+"MediaTek MT8173":   {
+"soc_name": "MediaTek MT8173",
+"chipset_model": "8173",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue GX6250",
+"gpu_model": "6250",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_gx"
+},
+"MediaTek MT8176":   {
+"soc_name": "MediaTek MT8176",
+"chipset_model": "8176",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR Rogue GX6250",
+"gpu_model": "6250",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_gx"
+},
+"MediaTek MT8312*":   {
+"soc_name": "MediaTek MT8312*",
+"chipset_model": "8312",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8317":   {
+"soc_name": "MediaTek MT8317",
+"chipset_model": "8317",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 531",
+"gpu_model": "531",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT8321*":   {
+"soc_name": "MediaTek MT8321*",
+"chipset_model": "8321",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8377":   {
+"soc_name": "MediaTek MT8377",
+"chipset_model": "8377",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 531",
+"gpu_model": "531",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT8382":   {
+"soc_name": "MediaTek MT8382",
+"chipset_model": "8382",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8389":   {
+"soc_name": "MediaTek MT8389",
+"chipset_model": "8389",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"MediaTek MT8389Q":   {
+"soc_name": "MediaTek MT8389Q",
+"chipset_model": "8389",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8392":   {
+"soc_name": "MediaTek MT8392",
+"chipset_model": "8392",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8685":   {
+"soc_name": "MediaTek MT8685",
+"chipset_model": "8685",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"MediaTek MT8732*":   {
+"soc_name": "MediaTek MT8732*",
+"chipset_model": "8732",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8735*":   {
+"soc_name": "MediaTek MT8735*",
+"chipset_model": "8735",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8783*":   {
+"soc_name": "MediaTek MT8783*",
+"chipset_model": "8783",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"MediaTek MT8785WA":   {
+"soc_name": "MediaTek MT8785WA",
+"chipset_model": "8785",
+"chipset_series": "cpuinfo_arm_chipset_series_mediatek_mt",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"NovaThor U8500":   {
+"soc_name": "NovaThor U8500",
+"chipset_model": "8500",
+"chipset_series": "cpuinfo_arm_chipset_series_novathor_u",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Nvidia Tegra AP20H":   {
+"soc_name": "Nvidia Tegra AP20H",
+"chipset_model": "20",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_ap",
+"gpu_name": "Nvidia Tegra 2",
+"gpu_model": "2",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra AP33":   {
+"soc_name": "Nvidia Tegra AP33",
+"chipset_model": "33",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_ap",
+"gpu_name": "Nvidia Tegra 3",
+"gpu_model": "3",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra SL460N":   {
+"soc_name": "Nvidia Tegra SL460N",
+"chipset_model": "460",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_sl",
+"gpu_name": "Nvidia Tegra 3",
+"gpu_model": "3",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra T114":   {
+"soc_name": "Nvidia Tegra T114",
+"chipset_model": "114",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra 4",
+"gpu_model": "4",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra T124":   {
+"soc_name": "Nvidia Tegra T124",
+"chipset_model": "124",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra K1",
+"gpu_model": "1",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra_k"
+},
+"Nvidia Tegra T132":   {
+"soc_name": "Nvidia Tegra T132",
+"chipset_model": "132",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra K1",
+"gpu_model": "1",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra_k"
+},
+"Nvidia Tegra T20":   {
+"soc_name": "Nvidia Tegra T20",
+"chipset_model": "20",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra 2",
+"gpu_model": "2",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra T210":   {
+"soc_name": "Nvidia Tegra T210",
+"chipset_model": "210",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra X1",
+"gpu_model": "1",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra_x"
+},
+"Nvidia Tegra T30*":   {
+"soc_name": "Nvidia Tegra T30*",
+"chipset_model": "30",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra 3",
+"gpu_model": "3",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Nvidia Tegra T33":   {
+"soc_name": "Nvidia Tegra T33",
+"chipset_model": "33",
+"chipset_series": "cpuinfo_arm_chipset_series_nvidia_tegra_t",
+"gpu_name": "Nvidia Tegra 3",
+"gpu_model": "3",
+"gpu_series": "cpuinfo_android_gpu_series_nvidia_tegra"
+},
+"Pinecone Surge S1":   {
+"soc_name": "Pinecone Surge S1",
+"chipset_model": "1",
+"chipset_series": "cpuinfo_arm_chipset_series_pinecone_surge_s",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Qualcomm Snapdragon APQ8009":   {
+"soc_name": "Qualcomm Snapdragon APQ8009",
+"chipset_model": "8009",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 304",
+"gpu_model": "304",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 410 APQ8016":   {
+"soc_name": "Qualcomm Snapdragon 410 APQ8016",
+"chipset_model": "8016",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 306",
+"gpu_model": "306",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon APQ8017":   {
+"soc_name": "Qualcomm Snapdragon APQ8017",
+"chipset_model": "8017",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 308",
+"gpu_model": "308",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 APQ8026":   {
+"soc_name": "Qualcomm Snapdragon 400 APQ8026",
+"chipset_model": "8026",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 APQ8028":   {
+"soc_name": "Qualcomm Snapdragon 400 APQ8028",
+"chipset_model": "8028",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon APQ8039":   {
+"soc_name": "Qualcomm Snapdragon APQ8039",
+"chipset_model": "8039",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 405",
+"gpu_model": "405",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon APQ8053":   {
+"soc_name": "Qualcomm Snapdragon APQ8053",
+"chipset_model": "8053",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 506",
+"gpu_model": "506",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Pro APQ8064*":   {
+"soc_name": "Qualcomm Snapdragon S4 Pro APQ8064*",
+"chipset_model": "8064",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 320",
+"gpu_model": "320",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S 400 Krait SAPQ8074*":   {
+"soc_name": "Qualcomm Snapdragon S 400 Krait SAPQ8074*",
+"chipset_model": "8074",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 330",
+"gpu_model": "330",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon APQ8076":   {
+"soc_name": "Qualcomm Snapdragon APQ8076",
+"chipset_model": "8076",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 510",
+"gpu_model": "510",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 805 Krait 450 APQ8084":   {
+"soc_name": "Qualcomm Snapdragon 805 Krait 450 APQ8084",
+"chipset_model": "8084",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 420",
+"gpu_model": "420",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 810 APQ8094":   {
+"soc_name": "Qualcomm Snapdragon 810 APQ8094",
+"chipset_model": "8094",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
+"gpu_name": "Qualcomm Adreno 430",
+"gpu_model": "430",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S1 MSM7225AB":   {
+"soc_name": "Qualcomm Snapdragon S1 MSM7225AB",
+"chipset_model": "7225",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 200",
+"gpu_model": "200",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S1 MSM7625A":   {
+"soc_name": "Qualcomm Snapdragon S1 MSM7625A",
+"chipset_model": "7625",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 200",
+"gpu_model": "200",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S2 MSM7630":   {
+"soc_name": "Qualcomm Snapdragon S2 MSM7630",
+"chipset_model": "7630",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 205",
+"gpu_model": "205",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 208 MSM8208":   {
+"soc_name": "Qualcomm Snapdragon 208 MSM8208",
+"chipset_model": "8208",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 304",
+"gpu_model": "304",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 210 MSM8209":   {
+"soc_name": "Qualcomm Snapdragon 210 MSM8209",
+"chipset_model": "8209",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 304",
+"gpu_model": "304",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 200 MSM8210":   {
+"soc_name": "Qualcomm Snapdragon 200 MSM8210",
+"chipset_model": "8210",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 200 MSM8212":   {
+"soc_name": "Qualcomm Snapdragon 200 MSM8212",
+"chipset_model": "8212",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 200 MSM8225":   {
+"soc_name": "Qualcomm Snapdragon 200 MSM8225",
+"chipset_model": "8225",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 203",
+"gpu_model": "203",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8226":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8226",
+"chipset_model": "8226",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8228":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8228",
+"chipset_model": "8228",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8230*":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8230*",
+"chipset_model": "8230",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon MSM8239":   {
+"soc_name": "Qualcomm Snapdragon MSM8239",
+"chipset_model": "8239",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 405",
+"gpu_model": "405",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S3 MSM8260A":   {
+"soc_name": "Qualcomm Snapdragon S3 MSM8260A",
+"chipset_model": "8260",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 225",
+"gpu_model": "225",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 800 Krait 400 MSM8274":   {
+"soc_name": "Qualcomm Snapdragon 800 Krait 400 MSM8274",
+"chipset_model": "8274",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 330",
+"gpu_model": "330",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon MSM8609":   {
+"soc_name": "Qualcomm Snapdragon MSM8609",
+"chipset_model": "8609",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 304",
+"gpu_model": "304",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 200 MSM8610":   {
+"soc_name": "Qualcomm Snapdragon 200 MSM8610",
+"chipset_model": "8610",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 200 MSM8612":   {
+"soc_name": "Qualcomm Snapdragon 200 MSM8612",
+"chipset_model": "8612",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Play MSM8625*":   {
+"soc_name": "Qualcomm Snapdragon S4 Play MSM8625*",
+"chipset_model": "8625",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 203",
+"gpu_model": "203",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8626":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8626",
+"chipset_model": "8626",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Plus Krait MSM8627":   {
+"soc_name": "Qualcomm Snapdragon S4 Plus Krait MSM8627",
+"chipset_model": "8627",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8628":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8628",
+"chipset_model": "8628",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Plus Krait MSM8660":   {
+"soc_name": "Qualcomm Snapdragon S4 Plus Krait MSM8660",
+"chipset_model": "8660",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 220",
+"gpu_model": "220",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 800 Krait 400 MSM8674PRO":   {
+"soc_name": "Qualcomm Snapdragon 800 Krait 400 MSM8674PRO",
+"chipset_model": "8674",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 330",
+"gpu_model": "330",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 210/212 MSM8909":   {
+"soc_name": "Qualcomm Snapdragon 210/212 MSM8909",
+"chipset_model": "8909",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 304",
+"gpu_model": "304",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 410/412 MSM8916":   {
+"soc_name": "Qualcomm Snapdragon 410/412 MSM8916",
+"chipset_model": "8916",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 306",
+"gpu_model": "306",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 425 MSM8917":   {
+"soc_name": "Qualcomm Snapdragon 425 MSM8917",
+"chipset_model": "8917",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 308",
+"gpu_model": "308",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 427 MSM8920":   {
+"soc_name": "Qualcomm Snapdragon 427 MSM8920",
+"chipset_model": "8920",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 308",
+"gpu_model": "308",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8926":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8926",
+"chipset_model": "8926",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 400 MSM8928":   {
+"soc_name": "Qualcomm Snapdragon 400 MSM8928",
+"chipset_model": "8928",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 415 MSM8929":   {
+"soc_name": "Qualcomm Snapdragon 415 MSM8929",
+"chipset_model": "8929",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 405",
+"gpu_model": "405",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Plus MSM8930*":   {
+"soc_name": "Qualcomm Snapdragon S4 Plus MSM8930*",
+"chipset_model": "8930",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 305",
+"gpu_model": "305",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 430 MSM8937":   {
+"soc_name": "Qualcomm Snapdragon 430 MSM8937",
+"chipset_model": "8937",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 505",
+"gpu_model": "505",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 615 MSM8939":   {
+"soc_name": "Qualcomm Snapdragon 615 MSM8939",
+"chipset_model": "8939",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 405",
+"gpu_model": "405",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 435 MSM8940":   {
+"soc_name": "Qualcomm Snapdragon 435 MSM8940",
+"chipset_model": "8940",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 505",
+"gpu_model": "505",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 617 MSM8952":   {
+"soc_name": "Qualcomm Snapdragon 617 MSM8952",
+"chipset_model": "8952",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 405",
+"gpu_model": "405",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 617 MSM8953*":   {
+"soc_name": "Qualcomm Snapdragon 617 MSM8953*",
+"chipset_model": "8953",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 506",
+"gpu_model": "506",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 650 MSM8956":   {
+"soc_name": "Qualcomm Snapdragon 650 MSM8956",
+"chipset_model": "8956",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 510",
+"gpu_model": "510",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon S4 Plus MSM8960":   {
+"soc_name": "Qualcomm Snapdragon S4 Plus MSM8960",
+"chipset_model": "8960",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 225",
+"gpu_model": "",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 800 Krait 400 MSM8974*":   {
+"soc_name": "Qualcomm Snapdragon 800 Krait 400 MSM8974*",
+"chipset_model": "8974",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 330",
+"gpu_model": "330",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 652 MSM8976*":   {
+"soc_name": "Qualcomm Snapdragon 652 MSM8976*",
+"chipset_model": "8976",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 510",
+"gpu_model": "510",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 808 MSM8992":   {
+"soc_name": "Qualcomm Snapdragon 808 MSM8992",
+"chipset_model": "8992",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 418",
+"gpu_model": "418",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 810 MSM8994*":   {
+"soc_name": "Qualcomm Snapdragon 810 MSM8994*",
+"chipset_model": "8994",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 430",
+"gpu_model": "430",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 820 Kryo MSM8996*":   {
+"soc_name": "Qualcomm Snapdragon 820 Kryo MSM8996*",
+"chipset_model": "8996",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 530",
+"gpu_model": "530",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 835 Kryo 280 MSM8998":   {
+"soc_name": "Qualcomm Snapdragon 835 Kryo 280 MSM8998",
+"chipset_model": "8998",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_msm",
+"gpu_name": "Qualcomm Adreno 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 450":   {
+"soc_name": "Qualcomm Snapdragon 450",
+"chipset_model": "450",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_snapdragon",
+"gpu_name": "Qualcomm Adreno 506",
+"gpu_model": "506",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 630":   {
+"soc_name": "Qualcomm Snapdragon 630",
+"chipset_model": "630",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_snapdragon",
+"gpu_name": "Qualcomm Adreno 508",
+"gpu_model": "508",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 660":   {
+"soc_name": "Qualcomm Snapdragon 660",
+"chipset_model": "660",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_snapdragon",
+"gpu_name": "Qualcomm Adreno 512",
+"gpu_model": "512",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 670":   {
+"soc_name": "Qualcomm Snapdragon 670",
+"chipset_model": "670",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_snapdragon",
+"gpu_name": "Qualcomm Adreno 615",
+"gpu_model": "615",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Qualcomm Snapdragon 845":   {
+"soc_name": "Qualcomm Snapdragon 845",
+"chipset_model": "845",
+"chipset_series": "cpuinfo_arm_chipset_series_qualcomm_snapdragon",
+"gpu_name": "Qualcomm Adreno 630",
+"gpu_model": "630",
+"gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
+},
+"Renesas MP5232":   {
+"soc_name": "Renesas MP5232",
+"chipset_model": "5232",
+"chipset_series": "cpuinfo_arm_chipset_series_renesas_mp",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Rockchip RK2928":   {
+"soc_name": "Rockchip RK2928",
+"chipset_model": "2928",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3026":   {
+"soc_name": "Rockchip RK3026",
+"chipset_model": "3026",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3066":   {
+"soc_name": "Rockchip RK3066",
+"chipset_model": "3066",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3126*":   {
+"soc_name": "Rockchip RK3126*",
+"chipset_model": "3126",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3128":   {
+"soc_name": "Rockchip RK3128",
+"chipset_model": "3128",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3168":   {
+"soc_name": "Rockchip RK3168",
+"chipset_model": "3168",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "PowerVR SGX 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Rockchip RK3188":   {
+"soc_name": "Rockchip RK3188",
+"chipset_model": "3188",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3229":   {
+"soc_name": "Rockchip RK3229",
+"chipset_model": "3229",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3328":   {
+"soc_name": "Rockchip RK3328",
+"chipset_model": "3328",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-450",
+"gpu_model": "450",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Rockchip RK3368":   {
+"soc_name": "Rockchip RK3368",
+"chipset_model": "3368",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "PowerVR Rogue G6110",
+"gpu_model": "6110",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_rogue_g"
+},
+"Rockchip RK3399":   {
+"soc_name": "Rockchip RK3399",
+"chipset_model": "3399",
+"chipset_series": "cpuinfo_arm_chipset_series_rockchip_rk",
+"gpu_name": "ARM Mali-T860",
+"gpu_model": "860",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 3110":   {
+"soc_name": "Samsung Exynos 3110",
+"chipset_model": "3110",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "PowerVR SGX 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Samsung Exynos 3470":   {
+"soc_name": "Samsung Exynos 3470",
+"chipset_model": "3470",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Samsung Exynos 3475":   {
+"soc_name": "Samsung Exynos 3475",
+"chipset_model": "3475",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 4210":   {
+"soc_name": "Samsung Exynos 4210",
+"chipset_model": "4210",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Samsung Exynos 4412":   {
+"soc_name": "Samsung Exynos 4412",
+"chipset_model": "4412",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Samsung Exynos 4415":   {
+"soc_name": "Samsung Exynos 4415",
+"chipset_model": "4415",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Samsung Exynos 5250":   {
+"soc_name": "Samsung Exynos 5250",
+"chipset_model": "5250",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T604",
+"gpu_model": "604",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 5260":   {
+"soc_name": "Samsung Exynos 5260",
+"chipset_model": "5260",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T624",
+"gpu_model": "624",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 5410":   {
+"soc_name": "Samsung Exynos 5410",
+"chipset_model": "5410",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Samsung Exynos 5420":   {
+"soc_name": "Samsung Exynos 5420",
+"chipset_model": "5420",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T628",
+"gpu_model": "628",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 5422":   {
+"soc_name": "Samsung Exynos 5422",
+"chipset_model": "5422",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T628",
+"gpu_model": "628",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 5430":   {
+"soc_name": "Samsung Exynos 5430",
+"chipset_model": "5430",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T628",
+"gpu_model": "628",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 5433":   {
+"soc_name": "Samsung Exynos 5433",
+"chipset_model": "5433",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7420":   {
+"soc_name": "Samsung Exynos 7420",
+"chipset_model": "7420",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T760",
+"gpu_model": "760",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7570":   {
+"soc_name": "Samsung Exynos 7570",
+"chipset_model": "7570",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7578":   {
+"soc_name": "Samsung Exynos 7578",
+"chipset_model": "7578",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7580":   {
+"soc_name": "Samsung Exynos 7580",
+"chipset_model": "7580",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T720",
+"gpu_model": "720",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7870":   {
+"soc_name": "Samsung Exynos 7870",
+"chipset_model": "7870",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T830",
+"gpu_model": "830",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7880":   {
+"soc_name": "Samsung Exynos 7880",
+"chipset_model": "7880",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T830",
+"gpu_model": "830",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 7885":   {
+"soc_name": "Samsung Exynos 7885",
+"chipset_model": "7885",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-G71",
+"gpu_model": "71",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"Samsung Exynos 8890":   {
+"soc_name": "Samsung Exynos 8890",
+"chipset_model": "8890",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-T880",
+"gpu_model": "880",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Samsung Exynos 8895":   {
+"soc_name": "Samsung Exynos 8895",
+"chipset_model": "8895",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-G71",
+"gpu_model": "71",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"Samsung Exynos 9810":   {
+"soc_name": "Samsung Exynos 9810",
+"chipset_model": "9810",
+"chipset_series": "cpuinfo_arm_chipset_series_samsung_exynos",
+"gpu_name": "ARM Mali-G72",
+"gpu_model": "72",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_g"
+},
+"Spreadtrum SC5735":   {
+"soc_name": "Spreadtrum SC5735",
+"chipset_model": "5735",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC6815AS":   {
+"soc_name": "Spreadtrum SC6815AS",
+"chipset_model": "6815",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC6820I":   {
+"soc_name": "Spreadtrum SC6820I",
+"chipset_model": "6820",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC7715*":   {
+"soc_name": "Spreadtrum SC7715*",
+"chipset_model": "7715",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC7727*":   {
+"soc_name": "Spreadtrum SC7727*",
+"chipset_model": "7727",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC7730*":   {
+"soc_name": "Spreadtrum SC7730*",
+"chipset_model": "7730",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC7731*":   {
+"soc_name": "Spreadtrum SC7731*",
+"chipset_model": "7731",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC7735S":   {
+"soc_name": "Spreadtrum SC7735S",
+"chipset_model": "7735",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC8810":   {
+"soc_name": "Spreadtrum SC8810",
+"chipset_model": "8810",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-300",
+"gpu_model": "300",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC8825":   {
+"soc_name": "Spreadtrum SC8825",
+"chipset_model": "8825",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC8830":   {
+"soc_name": "Spreadtrum SC8830",
+"chipset_model": "8830",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC9830*":   {
+"soc_name": "Spreadtrum SC9830*",
+"chipset_model": "9830",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC9832*":   {
+"soc_name": "Spreadtrum SC9832*",
+"chipset_model": "9832",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"Spreadtrum SC9850":   {
+"soc_name": "Spreadtrum SC9850",
+"chipset_model": "9850",
+"chipset_series": "cpuinfo_arm_chipset_series_spreadtrum_sc",
+"gpu_name": "ARM Mali-T820",
+"gpu_model": "820",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali_t"
+},
+"Texas Instruments OMAP4430":   {
+"soc_name": "Texas Instruments OMAP4430",
+"chipset_model": "4430",
+"chipset_series": "cpuinfo_arm_chipset_series_texas_instruments_omap",
+"gpu_name": "PowerVR SGX 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Texas Instruments OMAP4460":   {
+"soc_name": "Texas Instruments OMAP4460",
+"chipset_model": "4460",
+"chipset_series": "cpuinfo_arm_chipset_series_texas_instruments_omap",
+"gpu_name": "PowerVR SGX 540",
+"gpu_model": "540",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"Texas Instruments OMAP4470":   {
+"soc_name": "Texas Instruments OMAP4470",
+"chipset_model": "4470",
+"chipset_series": "cpuinfo_arm_chipset_series_texas_instruments_omap",
+"gpu_name": "PowerVR SGX 544",
+"gpu_model": "544",
+"gpu_series": "cpuinfo_android_gpu_series_powervr_sgx"
+},
+"WonderMedia WM8850":   {
+"soc_name": "WonderMedia WM8850",
+"chipset_model": "8850",
+"chipset_series": "cpuinfo_arm_chipset_series_wondermedia_wm",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"WonderMedia WM8880":   {
+"soc_name": "WonderMedia WM8880",
+"chipset_model": "8880",
+"chipset_series": "cpuinfo_arm_chipset_series_wondermedia_wm",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+},
+"WonderMedia WM8950":   {
+"soc_name": "WonderMedia WM8950",
+"chipset_model": "8950",
+"chipset_series": "cpuinfo_arm_chipset_series_wondermedia_wm",
+"gpu_name": "ARM Mali-400",
+"gpu_model": "400",
+"gpu_series": "cpuinfo_android_gpu_series_arm_mali"
+}
+}

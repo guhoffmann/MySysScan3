@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- android:installLocation="auto": you can transfer installation
+ to sdcard and back to internal memory!!! -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.uweandapp.MySysScan3"
+    android:installLocation="auto">
+    
+    <!-- necessary for Apps < Android 5 to check camera features! -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="27" />
+
+    <application
+		android:label="@string/main_app"
+		android:theme="@style/MyTheme"
+		android:allowBackup="true"
+      android:fontFamily="sans-serif"
+        android:icon="@drawable/chip">
+
+        <!-- android:screenOrientation="portrait" and
+         android:configChanges="keyboardHidden|orientation|screenSize":
+          Execute app in portrait mode and don't allow to change and
+          start start main activity again -->
+        <activity android:name="MainActivity"
+        android:screenOrientation="portrait"
+            android:configChanges="keyboardHidden|orientation|screenSize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+    </application>
+
+</manifest>

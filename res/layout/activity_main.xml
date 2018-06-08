@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#ff000000"
+    android:id="@+id/mainWindow">
+    
+    <TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+      android:layout_centerVertical="true"
+		android:text="@string/main_label" 
+		android:textSize="20sp"
+		android:textColor="#b00030" 
+		android:autoLink="all" />
+
+    <ExpandableListView
+        android:id="@+id/lvExp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_toolbar"/>
+
+    <!-- This is the TextView of the Progress-Window used
+    together with the progress bar below.
+     These two are put on top of the screen layers
+     cause they are declared last in this RelativeLayout.
+      Textview my_folie darkens the background when
+      the progress window is shown! -->
+
+    <TextView
+        android:id="@+id/my_folie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="#99000000"
+        android:backgroundTintMode="screen" />
+    <TextView
+        android:id="@+id/my_popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="#90bf60"
+        android:paddingBottom="40dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:text="Dies ist ein Test!"
+        android:textAlignment="center"
+        android:textColor="#080e3a"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        android:title="@string/main_app" />
+
+    <ProgressBar
+        android:id="@+id/myProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:minWidth="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:paddingTop="40dp"
+        android:visibility="invisible"
+        android:layout_weight="1" />
+
+</RelativeLayout>
