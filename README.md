@@ -10,7 +10,8 @@ Written without Android Studio/Eclipse with command line editors for compilation
 
 Then you compile the whole bunch:
 
-- copy project to a folder on your phone/
+- copy project to a folder on your phone/tablet accessible by TERMUX
+- start TERMUX
 - start build.sh script in the root of the app directory
 - select the FIRST!!! option in the menu to generate an APK file
 - wait a while...
