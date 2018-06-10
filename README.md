@@ -19,7 +19,7 @@ Then you compile the whole bunch:
 - wait a while...
 - find and install the resulting APK in the bin dir of the project
 
-# Compile and install on Linux PC or Raspberry Pi
+# Compile and install with Linux PC/Raspberry Pi to phone/tablet
 
 - get a copy of the Android build tools (I've used contents of subfolder build-tools/26.0.1 of Andoid SDK)
 - make an entry for your development machine in the "case $HOSTNAME in..." statement in line 46 of the script
