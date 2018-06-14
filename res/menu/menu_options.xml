@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_refresh"
-        android:icon="@android:drawable/stat_notify_sync"
+        android:icon="@android:drawable/ic_popup_sync"
         android:title="Refresh all"
         android:showAsAction="always"/>
     <item
         android:id="@+id/action_info"
-        android:icon="@android:drawable/ic_menu_info_details"
+        android:icon="@android:drawable/ic_dialog_info"
         android:title="Info"
         android:showAsAction="always"/>
 </menu>

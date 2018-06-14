@@ -11,7 +11,7 @@
         android:id="@+id/lblListHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="18dp"
+        android:paddingLeft="40dp"
         android:textSize="17dp"
         android:textColor="#bbddbb"/>
 </LinearLayout>

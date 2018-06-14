@@ -15,7 +15,6 @@
 		android:layout_height="wrap_content"
 		android:layout_centerHorizontal="true"
       android:layout_centerVertical="true"
-		android:text="@string/main_label" 
 		android:textSize="20sp"
 		android:textColor="#b00030" 
 		android:autoLink="all" />
@@ -23,8 +22,10 @@
     <ExpandableListView
         android:id="@+id/lvExp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/my_toolbar"/>
+        android:layout_height="wrap_content"/>
+        
+        <!-- make own indicator if necessary -->
+        <!-- android:groupIndicator="@drawable/myindicator"/> -->
 
     <!-- This is the TextView of the Progress-Window used
     together with the progress bar below.
@@ -51,12 +52,12 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
+        android:minWidth="220dp"
         android:text="Dies ist ein Test!"
         android:textAlignment="center"
         android:textColor="#080e3a"
         android:textSize="18sp"
-        android:visibility="invisible"
-        android:title="@string/main_app" />
+        android:visibility="invisible"/>
 
     <ProgressBar
         android:id="@+id/myProgressBar"
