@@ -150,27 +150,20 @@ public class MainActivity extends Activity {
             ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
             ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
             ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
-            popupText = "Reading System data!\nPlease wait a moment... 20%";
+            popupText = "Reading System data!\nPlease wait... 20%";
             publishProgress(20);
-
             MyTools.getPrimBench(500);
-            popupText = "Reading System data!\nPlease wait a moment... 30%";
-            publishProgress(30);
-            MyTools.getPrimBench(500);
-            popupText = "Reading System data!\nPlease wait a moment... 40%";
+            popupText = "Reading System data!\nPlease wait... 40%";
             publishProgress(40);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
-            popupText = "Reading System data!\nPlease wait a moment... 60%";
+            popupText = "Reading System data!\nPlease wait... 60%";
             publishProgress(60);
             MyTools.getSquareBench(500);
-            popupText = "Reading System data!\nPlease wait a moment... 70%";
-            publishProgress(70);
-            MyTools.getSquareBench(500);
-            popupText = "Reading System data!\nPlease wait a moment... 80%";
+            popupText = "Reading System data!\nPlease wait... 80%";
             publishProgress(80);
-            popupText = "Reading System data!\nPlease wait a moment... 90%";
+            popupText = "Reading System data!\nPlease wait... 95%";
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
-            publishProgress(90);
+            publishProgress(95);
 
             //-------------------- everything is done to refresh fluent data -----------------------
 
@@ -263,7 +256,9 @@ public class MainActivity extends Activity {
                 listAdapter.notifyDataSetChanged();
                 return true;
             case R.id.action_info:
-                showInfo(getString(R.string.main_app) + "\n\u00A9 GU Hoffmann 2018");
+                showInfo(getString(R.string.main_app) +"\n"
+                         + "version " + getString(R.string.app_version) + "\n"
+                         + "\n\u00A9 GU Hoffmann 2018");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -409,7 +404,7 @@ public class MainActivity extends Activity {
         //-------------------------- get storage informations --------------------------------------
 
         listDataHeader.add(" Storage");
-        // getDisvalues are put in readNewValuesClass() for being able to be updated on demand!
+        // values are put in readNewValuesClass() for being able to be updated on demand!
 
         //------------------------ Periphals: Camera, Display etc. ---------------------------------
 

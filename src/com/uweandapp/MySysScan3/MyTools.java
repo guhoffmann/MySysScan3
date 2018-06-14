@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import android.hardware.camera2.*;
 import android.util.Log;
+import android.util.DisplayMetrics;
 import android.view.Display;
 
 import org.json.JSONException;
@@ -485,11 +486,33 @@ public class MyTools {
      */
 
     public static String getDisplayInfos(Activity activity) {
+       
+       // Code geklaut aus Dalvik-Explorer!
+       // Gets full screen resolution including ActionBar!
+        
         Display display =  activity.getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-
-        return size.x + " x " + size.y + " Pixel";
+        
+      DisplayMetrics metrics = new DisplayMetrics();
+      display.getMetrics(metrics);
+      int widthPixels = metrics.widthPixels;
+      int heightPixels = metrics.heightPixels;
+      try {
+      widthPixels = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+      heightPixels = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+      } catch (Exception ignored) {
+      }
+      try {
+      Point realSize = new Point();
+      Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
+      widthPixels = realSize.x;
+      heightPixels = realSize.y;
+      } catch (Exception ignored) {
+      }
+        
+        return widthPixels
+               + " x "
+               + heightPixels
+               + " Pixel";
 
     } // of public static String getDisplayInfos(Activity activity)
 
