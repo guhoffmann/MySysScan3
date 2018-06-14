@@ -1,0 +1,263 @@
+#!/bin/bash
+
+################## build.sh (C) GU Hoffmann 05.06.2018 ###################
+#
+# Update the basic Android App with commandline tools on a X86-PC,
+# Raspberry Pi or an Android device running TERMUX!
+#                        COMPLETE-VERSION
+#
+##########################################################################
+
+SCRIPTNAME="buildapp 18.06.07"
+echo -e "*** $SCRIPTNAME ***\n"
+
+if [ $(uname -o) = "Android" ];then
+   HOSTNAME="Android"
+else
+   HOSTNAME=$(cat /etc/hostname)
+fi
+
+echo -e "\nHostname: $HOSTNAME\n"
+
+##########################################################################
+######################### Prerequisites ##################################
+#################### Determine paths and tools ###########################
+##########################################################################
+
+# Select SDK 23 = Android 6.0
+# Necessary for using Camera2-Api!!!
+
+PLATFORM="android-23-6.0"
+
+# Names of app,package and apk to create
+
+APPNAME="MySysScan3"
+APKNAME="MySysScan3"
+
+PACKAGEPATH="com/uweandapp"
+PACKAGENAME="com.uweandapp"
+
+# Get locations of project files and sparSDK with android.jar files
+# from SDK 19(4.4 KitKat) and SDK 23(6.0 Marshmallow) only!
+# Build-Tools in sparSDK are 26.0.1 for now on PC/Notebook!
+# These are used for X86/AMD64 PC's only.
+# On Android devices/Pi we use the google tools ARM/TERMUX!
+
+case $HOSTNAME in
+
+   B590)
+      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM/android.jar
+      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
+      BUILDTOOLSPATH=/media/uwe/backup/data/Android/Sdk/build-tools/26.0.1/
+      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+      # Deklaration of build-tools 
+      AAPT=$BUILDTOOLSPATH""aapt
+      APKSIGNER=jarsigner
+      ZIPALIGN=$BUILDTOOLSPATH""zipalign
+      DX=dalvik-exchange
+      JAVAC="ecj -source 1.7 -target 1.7 "
+      ;;
+      
+   senior-medion)
+      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM/android.jar
+      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
+      BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/26.0.1/
+      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+      # Deklaration of build-tools 
+      AAPT=$BUILDTOOLSPATH""aapt
+      APKSIGNER=jarsigner
+      ZIPALIGN=$BUILDTOOLSPATH""zipalign
+      DX=dalvik-exchange
+      JAVAC="ecj -source 1.7 -target 1.7 "
+      ;;
+
+   gamepi)
+      SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM/android.jar
+      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
+      BUILDTOOLSPATH=""
+      PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
+      # Deklaration of build-tools 
+      AAPT=$BUILDTOOLSPATH""aapt
+      APKSIGNER=jarsigner
+      ZIPALIGN=$BUILDTOOLSPATH""zipalign
+      DX=dalvik-exchange
+      JAVAC="ecj -source 1.7 -target 1.7 "
+      ;;
+
+   Android)
+      SDK=~/uwe/sparSDK/$PLATFORM/android.jar
+      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
+      BUILDTOOLSPATH=""
+      PROJECTDIR=~/uwe/$APPNAME
+      # Deklaration of build-tools 
+      AAPT=$BUILDTOOLSPATH""aapt
+      APKSIGNER=apksigner
+      ZIPALIGN=$BUILDTOOLSPATH""zipalign
+      DX=dx
+      JAVAC="ecj -source 1.7 -target 1.7 "
+      ;;
+      
+   *)
+      exit;;
+esac
+
+# Now go on and select what to do...
+
+MENU="$APPNAME-App-New \
+      $APPNAME-App-New_with_test_on_phone \
+      $APPNAME-App-New_with_test_on_phone_with_LogCat \
+      $APPNAME-App-Run-without-compile \
+      Abbruch"
+      
+PS3="Auswahl:"
+COLUMNS=1
+
+select ITEM in $MENU
+do
+   case $ITEM in
+   
+      $APPNAME-App-New)
+         break;;
+         
+      $APPNAME-App-New_with_test_on_phone)
+         break;;
+
+      $APPNAME-App-New_with_test_on_phone_with_LogCat)
+         break;;
+         
+      $APPNAME-App-Run-without-compile)
+         break;;
+         
+      Abbruch)
+         echo "Abbruch!"
+         exit;;
+         
+      *)
+         echo "Abbruch!"
+         exit;;
+   esac
+done
+
+##########################################################################
+######################### Prerequisites ##################################
+####### Specify compiler options to get only useful messages #############
+##########################################################################
+
+#COPTIONS="-warn:-allDeprecation"
+
+##########################################################################
+###################### Compile and create app ############################
+##########################################################################
+
+if [ $ITEM != "$APPNAME-App-Run-without-compile" ]; then
+
+   STARTZEIT=$(date +%s)
+
+   # Create R.java to access ressources from my Java source code
+
+   echo -e "\n=> Creating R.java..."
+   $AAPT package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
+         -S $PROJECTDIR/res -I $SDK
+
+   # Compile Java files
+
+   echo -e "\n=> Compiling java..."
+   $JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
+        $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 
+
+   # Make a dex file
+
+   echo -e "\n=> Making Dex..."
+   $DX --dex --output=$PROJECTDIR/bin/classes.dex $PROJECTDIR/obj
+
+   #If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
+   # you use old build tools and DX try to translate java 1.7 rather than 1.8.
+   # To solve the problem, you have to specify 1.7 java version in the previous
+   #javac command:
+   #javac -d obj -source 1.7 -target 1.7 ...
+
+   # Put everything in an APK
+
+   echo -e "\n=> Making unsigned APK..."
+   $AAPT package -f -m -F $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+         -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
+         
+   cp $PROJECTDIR/bin/classes.dex .
+   $AAPT add $PROJECTDIR/bin/$APKNAME.unaligned.apk classes.dex
+
+   ##### SIGNING #####
+   # Sign APK, it's a MUST if you wanna install on phone!!!
+   # Changed from 'apksigner' to 'jarsigner' on PC's/Pi to get apk's
+   # installed in > Android 7.0 devices! If working with Android in TERMUX,
+   # only TERMUX apksigner is used, it makes keystore generation,
+   # signing and aligning in one turn!
+
+   echo -e "\n=> Signing and aligning APK..."
+
+   if [ $HOSTNAME != "Android" ];then
+
+      # Generate new key pair for debug, switch off if you have one to sign the app!
+      # Keystore password = key password = debug-test, alias = test1.
+
+      echo -e "\n=> Generating keystore for signing..."
+      keytool -genkey -noprompt -storepass debug-test \
+              -keypass debug-test -alias test1 -dname "CN=uwe" \
+              -validity 36500 -keystore $PROJECTDIR/$APPNAME.keystore \
+              -keyalg RSA -keysize 2048
+
+      #$APKSIGNER sign --ks $PROJECTDIR/$APPNAME.keystore --ks-pass pass:debug-test \
+      #            $PROJECTDIR/bin/$APKNAME.unaligned.apk
+      $APKSIGNER -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
+                 -storepass debug-test $PROJECTDIR/bin/$APKNAME.unaligned.apk test1
+
+      # Align the APK (only works after signing)
+
+      $ZIPALIGN -f 4 $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+             $PROJECTDIR/bin/$APKNAME.apk
+   else
+      $APKSIGNER -p debug-test $PROJECTDIR/$APPNAME.keystore \
+      $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+      $PROJECTDIR/bin/$APKNAME.apk
+      
+   fi # of if [ $HOSTNAME != "Android" ]
+
+fi # of if [ $ITEM != "$APPNAME-App-Run-without-compile" ]
+
+##########################################################################
+################ Start at last if selected to do so ######################
+##########################################################################
+
+case $ITEM in
+
+	"$APPNAME-App-New_with_test_on_phone")
+		echo -e "\n=> Removing previous App installed...\n"
+		adb uninstall $PACKAGENAME.$APPNAME
+		echo -e "\n=> Installing and starting APK...\n"
+		adb install $PROJECTDIR/bin/$APKNAME.apk
+		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+		break;;
+		
+	"$APPNAME-App-New_with_test_on_phone_with_LogCat")
+		echo -e "\n=> Removing previous App installed...\n"
+		adb uninstall $PACKAGENAME.$APPNAME
+		echo -e "\n=> Installing and starting APK for debugging...\n"
+		adb install $PROJECTDIR/bin/$APKNAME.apk
+		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+		PID=$(adb jdwp)
+		echo -e "App Process-ID: $PID"
+		adb logcat > logcat.txt
+		break;;
+      
+   "$APPNAME-App-Run-without-compile")
+      adb shell am force-stop $PACKAGENAME.$APPNAME
+      adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+		PID=$(adb jdwp)
+		echo -e "App Process-ID: $PID"
+		adb logcat > logcat.txt
+		break;;
+esac
+
+ENDZEIT=$(date +%s)
+DAUER=$(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')
+echo -e "\n$DAUER seconds elapsed for building.\n"
+echo -e "\nFINISHED!\n"
