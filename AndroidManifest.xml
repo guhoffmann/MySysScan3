@@ -17,8 +17,9 @@
 		android:label="@string/main_app"
 		android:theme="@style/MyTheme"
 		android:allowBackup="true"
+      android:debuggable="true"
       android:fontFamily="sans-serif"
-        android:icon="@drawable/chip">
+      android:icon="@drawable/chip">
 
         <!-- android:screenOrientation="portrait" and
          android:configChanges="keyboardHidden|orientation|screenSize":

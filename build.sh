@@ -6,9 +6,9 @@
 # Raspberry Pi or an Android device running TERMUX!
 #                        COMPLETE-VERSION
 #
-##########################################################################
+##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.07"
+SCRIPTNAME="buildapp 18.06.14"
 echo -e "*** $SCRIPTNAME ***\n"
 
 if [ $(uname -o) = "Android" ];then
@@ -101,11 +101,26 @@ case $HOSTNAME in
       exit;;
 esac
 
+##########################################################################
+######################### Prerequisites ##################################
+#########################  "Functions"  ##################################
+##########################################################################
+
+# Clean project
+
+CLEANFUNC="
+           rm $PROJECTDIR/bin/*.*; \
+           rm -r $PROJECTDIR/obj/*.*; \
+           rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
+           find -L $PROJECTDIR -name \"classes.dex\" -delete \
+           "
 # Now go on and select what to do...
 
-MENU="$APPNAME-App-New \
-      $APPNAME-App-New_with_test_on_phone \
-      $APPNAME-App-New_with_test_on_phone_with_LogCat \
+MENU="$APPNAME-New \
+      $APPNAME-New_with_test_on_device \
+      $APPNAME-New_with_test_on_device_with_LogCat \
+      $APPNAME-Run-without-compile \
+      $APPNAME-Clean \
       Abbruch"
       
 PS3="Auswahl:"
@@ -115,21 +130,32 @@ select ITEM in $MENU
 do
    case $ITEM in
    
-      $APPNAME-App-New)
+      $APPNAME-New)
+         bash -c "$CLEANFUNC"
          break;;
          
-      $APPNAME-App-New_with_test_on_phone)
+      $APPNAME-New_with_test_on_device)
+         bash -c "$CLEANFUNC"
          break;;
 
-      $APPNAME-App-New_with_test_on_phone_with_LogCat)
+      $APPNAME-New_with_test_on_device_with_LogCat)
+         bash -c "$CLEANFUNC"
          break;;
          
+      $APPNAME-Run-without-compile)
+         break;;
+         
+      $APPNAME-Clean)
+         bash -c "$CLEANFUNC"
+         echo "Project cleaned!"
+         exit;;
+         
       Abbruch)
-         echo "Abbruch!"
+         echo "Break!"
          exit;;
          
       *)
-         echo "Abbruch!"
+         echo "Break!"
          exit;;
    esac
 done
@@ -145,75 +171,80 @@ done
 ###################### Compile and create app ############################
 ##########################################################################
 
-STARTZEIT=$(date +%s)
+if [ $ITEM != "$APPNAME-Run-without-compile" ]\
+   && [ $ITEM != "$APPNAME-Clean" ]; then
 
-# Create R.java to access ressources from my Java source code
+   STARTZEIT=$(date +%s)
 
-echo -e "\n=> Creating R.java..."
-$AAPT package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
-      -S $PROJECTDIR/res -I $SDK
+   # Create R.java to access ressources from my Java source code
 
-# Compile Java files
+   echo -e "\n=> Creating R.java..."
+   $AAPT package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
+         -S $PROJECTDIR/res -I $SDK
 
-echo -e "\n=> Compiling java..."
-$JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
-     $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 
+   # Compile Java files
 
-# Make a dex file
+   echo -e "\n=> Compiling java..."
+   $JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
+        $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 
 
-echo -e "\n=> Making Dex..."
-$DX --dex --output=$PROJECTDIR/bin/classes.dex $PROJECTDIR/obj
+   # Make a dex file
 
-#If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
-# you use old build tools and DX try to translate java 1.7 rather than 1.8.
-# To solve the problem, you have to specify 1.7 java version in the previous
-#javac command:
-#javac -d obj -source 1.7 -target 1.7 ...
+   echo -e "\n=> Making Dex..."
+   $DX --dex --output=$PROJECTDIR/bin/classes.dex $PROJECTDIR/obj
 
-# Put everything in an APK
+   #If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
+   # you use old build tools and DX try to translate java 1.7 rather than 1.8.
+   # To solve the problem, you have to specify 1.7 java version in the previous
+   #javac command:
+   #javac -d obj -source 1.7 -target 1.7 ...
 
-echo -e "\n=> Making unsigned APK..."
-$AAPT package -f -m -F $PROJECTDIR/bin/$APKNAME.unaligned.apk \
-      -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
+   # Put everything in an APK
+
+   echo -e "\n=> Making unsigned APK..."
+   $AAPT package -f -m -F $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+         -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
+         
+   cp $PROJECTDIR/bin/classes.dex .
+   $AAPT add $PROJECTDIR/bin/$APKNAME.unaligned.apk classes.dex
+
+   ##### SIGNING #####
+   # Sign APK, it's a MUST if you wanna install on phone!!!
+   # Changed from 'apksigner' to 'jarsigner' on PC's/Pi to get apk's
+   # installed in > Android 7.0 devices! If working with Android in TERMUX,
+   # only TERMUX apksigner is used, it makes keystore generation,
+   # signing and aligning in one turn!
+
+   echo -e "\n=> Signing and aligning APK..."
+
+   if [ $HOSTNAME != "Android" ];then
+
+      # Generate new key pair for debug, switch off if you have one to sign the app!
+      # Keystore password = key password = debug-test, alias = test1.
+
+      echo -e "\n=> Generating keystore for signing..."
+      keytool -genkey -noprompt -storepass debug-test \
+              -keypass debug-test -alias test1 -dname "CN=uwe" \
+              -validity 36500 -keystore $PROJECTDIR/$APPNAME.keystore \
+              -keyalg RSA -keysize 2048
+
+      #$APKSIGNER sign --ks $PROJECTDIR/$APPNAME.keystore --ks-pass pass:debug-test \
+      #            $PROJECTDIR/bin/$APKNAME.unaligned.apk
+      $APKSIGNER -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
+                 -storepass debug-test $PROJECTDIR/bin/$APKNAME.unaligned.apk test1
+
+      # Align the APK (only works after signing)
+
+      $ZIPALIGN -f 4 $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+             $PROJECTDIR/bin/$APKNAME.apk
+   else
+      $APKSIGNER -p debug-test $PROJECTDIR/$APPNAME.keystore \
+      $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+      $PROJECTDIR/bin/$APKNAME.apk
       
-cp $PROJECTDIR/bin/classes.dex .
-$AAPT add $PROJECTDIR/bin/$APKNAME.unaligned.apk classes.dex
+   fi # of if [ $HOSTNAME != "Android" ]
 
-##### SIGNING #####
-
-# Sign APK, it's a MUST if you wanna install on phone!!!
-# Changed from 'apksigner' to 'jarsigner' on PC's/Pi to get apk's
-# installed in > Android 7.0 devices! If working with Android in TERMUX,
-# only TERMUX apksigner is used, it makes keystore generation,
-# signing and aligning in one turn!
-
-echo -e "\n=> Signing and aligning APK..."
-
-if [ $HOSTNAME != "Android" ];then
-
-   # Generate new key pair for debug, switch off if you have one to sign the app!
-   # Keystore password = key password = debug-test, alias = test1.
-
-   echo -e "\n=> Generating keystore for signing..."
-   keytool -genkey -noprompt -storepass debug-test \
-           -keypass debug-test -alias test1 -dname "CN=uwe" \
-           -validity 36500 -keystore $PROJECTDIR/$APPNAME.keystore \
-           -keyalg RSA -keysize 2048
-
-   #$APKSIGNER sign --ks $PROJECTDIR/$APPNAME.keystore --ks-pass pass:debug-test \
-   #            $PROJECTDIR/bin/$APKNAME.unaligned.apk
-   $APKSIGNER -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
-              -storepass debug-test $PROJECTDIR/bin/$APKNAME.unaligned.apk test1
-
-   # Align the APK (only works after signing)
-
-   $ZIPALIGN -f 4 $PROJECTDIR/bin/$APKNAME.unaligned.apk \
-          $PROJECTDIR/bin/$APKNAME.apk
-else
-   $APKSIGNER -p debug-test $PROJECTDIR/$APPNAME.keystore \
-   $PROJECTDIR/bin/$APKNAME.unaligned.apk \
-   $PROJECTDIR/bin/$APKNAME.apk
-fi
+fi # of if [ $ITEM != "$APPNAME-Run-without-compile" ]..
 
 ##########################################################################
 ################ Start at last if selected to do so ######################
@@ -221,7 +252,7 @@ fi
 
 case $ITEM in
 
-	"$APPNAME-App-New_with_test_on_phone")
+	"$APPNAME-New_with_test_on_device")
 		echo -e "\n=> Removing previous App installed...\n"
 		adb uninstall $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK...\n"
@@ -229,7 +260,7 @@ case $ITEM in
 		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 		
-	"$APPNAME-App-New_with_test_on_phone_with_LogCat")
+	"$APPNAME-New_with_test_on_device_with_LogCat")
 		echo -e "\n=> Removing previous App installed...\n"
 		adb uninstall $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK for debugging...\n"
@@ -237,7 +268,13 @@ case $ITEM in
 		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
 		PID=$(adb jdwp)
 		echo -e "App Process-ID: $PID"
-		adb logcat > logcat.txt
+		#adb logcat > logcat.txt
+      adb logcat|grep $PID
+      break;;
+      
+   "$APPNAME-App-Run-without-compile")
+      adb shell am force-stop $PACKAGENAME.$APPNAME
+      adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 esac
 
