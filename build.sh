@@ -8,8 +8,14 @@
 #
 ##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.14"
-echo -e "*** $SCRIPTNAME ***\n"
+SCRIPTNAME="buildapp 18.06.15"
+
+WHITE="\033[0;37m"
+GREEN="\033[1;32m"
+BLUE="\033[1;34m"
+
+clear
+echo -e $GREEN"*** $SCRIPTNAME ***\n"$WHITE
 
 if [ $(uname -o) = "Android" ];then
    HOSTNAME="Android"
@@ -17,7 +23,7 @@ else
    HOSTNAME=$(cat /etc/hostname)
 fi
 
-echo -e "\nHostname: $HOSTNAME\n"
+echo -e $BLUE"\nHostname: $HOSTNAME\n"$WHITE
 
 ##########################################################################
 ######################### Prerequisites ##################################
@@ -114,6 +120,7 @@ CLEANFUNC="
            rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
            find -L $PROJECTDIR -name \"classes.dex\" -delete \
            "
+
 # Now go on and select what to do...
 
 MENU="$APPNAME-New \
@@ -160,6 +167,8 @@ do
    esac
 done
 
+clear
+
 ##########################################################################
 ######################### Prerequisites ##################################
 ####### Specify compiler options to get only useful messages #############
@@ -176,21 +185,25 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
 
    STARTZEIT=$(date +%s)
 
-   # Create R.java to access ressources from my Java source code
+   # compile all resources in projects res dir to R.java
+   # for accessing ressources from Java source code
 
-   echo -e "\n=> Creating R.java..."
+   echo -e $GREEN"\n=> Creating R.java..."$WHITE
    $AAPT package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
          -S $PROJECTDIR/res -I $SDK
 
    # Compile Java files
 
-   echo -e "\n=> Compiling java..."
+   echo -e $GREEN"\n=> Compiling java..."$WHITE
    $JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
-        $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 
+        $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 2>&1|grep --color -E '^|WARNING|ERROR'
+
+
+   COMPILEZEIT=$(date +%s)
 
    # Make a dex file
 
-   echo -e "\n=> Making Dex..."
+   echo -e $GREEN"\n=> Making Dex..."$WHITE
    $DX --dex --output=$PROJECTDIR/bin/classes.dex $PROJECTDIR/obj
 
    #If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
@@ -201,7 +214,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
 
    # Put everything in an APK
 
-   echo -e "\n=> Making unsigned APK..."
+   echo -e $GREEN"\n=> Making unsigned APK..."$WHITE
    $AAPT package -f -m -F $PROJECTDIR/bin/$APKNAME.unaligned.apk \
          -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
          
@@ -215,7 +228,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # only TERMUX apksigner is used, it makes keystore generation,
    # signing and aligning in one turn!
 
-   echo -e "\n=> Signing and aligning APK..."
+   echo -e $GREEN"\n=> Signing and aligning APK..."$WHITE
 
    if [ $HOSTNAME != "Android" ];then
 
@@ -245,6 +258,8 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    fi # of if [ $HOSTNAME != "Android" ]
 
 fi # of if [ $ITEM != "$APPNAME-Run-without-compile" ]..
+
+BUILDZEIT=$(date +%s)
 
 ##########################################################################
 ################ Start at last if selected to do so ######################
@@ -279,6 +294,7 @@ case $ITEM in
 esac
 
 ENDZEIT=$(date +%s)
-DAUER=$(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')
-echo -e "\n$DAUER seconds elapsed for building.\n"
-echo -e "\nFINISHED!\n"
+echo -e "\nTime spent:\n\n"$(echo $COMPILEZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for compiling."
+echo -e $(echo $BUILDZEIT " " $COMPILEZEIT | awk '{print($1-$2)}')" seconds for creating & signing apk."
+echo -e $(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for whole build process.\n"
+echo -e $BLUE"* $SCRIPTNAME: working on $APPNAME FINISHED! *"$WHITE

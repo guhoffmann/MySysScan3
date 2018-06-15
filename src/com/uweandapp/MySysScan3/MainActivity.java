@@ -2,17 +2,15 @@ package com.uweandapp.MySysScan3;
 
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +40,6 @@ public class MainActivity extends Activity {
     private ExpandableListView expListView;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
-    private TextView myPopupView;
-    private TextView myFolie;
-    private ProgressBar myProgressBar;
     private JSONObject socObject;
 
     /** Class for async task calculating benchmarks and new values *********************************
@@ -64,7 +59,25 @@ public class MainActivity extends Activity {
         private List<String> benchResultList   = new ArrayList<String>();
         private List<String> ramResultList     = new ArrayList<String>();
         private List<String> storageResultList = new ArrayList<String>();
-        String popupText;
+        /** progress dialog to show user that the backup is processing. */
+        private ProgressDialog dialog;
+        String dialogMessage;
+        /** application context. */
+        private Activity activity;
+
+        public readNewValuesClass(Activity activity) {
+           this.activity = activity;
+           dialog = new ProgressDialog(activity);
+           dialog.setCancelable(false);
+        }
+
+        // do this with the UI BEFORE processing async task!
+        @Override
+        protected void onPreExecute() {
+            this.dialog.setTitle("Reading System data...");
+            this.dialog.setMessage("Preparing\n|____________________|");
+            this.dialog.show();
+        } // of onPreExecute()
 
         // do this DURING processing async task!
         @Override
@@ -72,8 +85,8 @@ public class MainActivity extends Activity {
 
             //-------------- everything that must be done to refresh fluent data -------------------
 
-            popupText = "Reading System data!\nPlease wait a moment... 0%";
-            publishProgress(0);
+            dialogMessage = "Getting OS data\n|=____________________|";
+            publishProgress(10);
 
             // get device informations
 
@@ -90,9 +103,11 @@ public class MainActivity extends Activity {
                 deviceList.add("Host-IP|" + MyTools.getIp());
             //}
 
+            dialogMessage = "Getting storage information\n|=====________________|";
+            publishProgress(20);
+            
             // get storage informations
 
-            popupText = "Reading System data!\nPlease wait a moment... 0%";
             totalInternalStorage     = MyTools.getTotalInternalStorage();
             totalExternalStorage     = MyTools.getExternalStorage(0);
             availableInternalStorage = MyTools.getInternalStorage(1);
@@ -143,42 +158,43 @@ public class MainActivity extends Activity {
                             + ")\n" +  MyTools.calcAmount(availableExternalStorage) + "B available");
             }
 
-            popupText = "Reading System data!\nPlease wait a moment... 10%";
-            publishProgress(10);
-
+            dialogMessage = "Getting RAM information\n|=======______________|";
+            publishProgress(30);
+            
             ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
             ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
             ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
             ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
-            popupText = "Reading System data!\nPlease wait... 20%";
-            publishProgress(20);
-            MyTools.getPrimBench(500);
-            popupText = "Reading System data!\nPlease wait... 40%";
+            
+            dialogMessage = "Primes benchmark\n|=========____________|";
             publishProgress(40);
+            MyTools.getPrimBench(500);
+            dialogMessage = "Primes benchmark\n|============_________|";
+            publishProgress(50);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
-            popupText = "Reading System data!\nPlease wait... 60%";
+            
+            dialogMessage = "Fourier benchmark\n|==============_______|";
             publishProgress(60);
             MyTools.getSquareBench(500);
-            popupText = "Reading System data!\nPlease wait... 80%";
-            publishProgress(80);
-            popupText = "Reading System data!\nPlease wait... 95%";
+            dialogMessage = "Fourier benchmark\n|===================__|";
+            publishProgress(70);
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
-            publishProgress(95);
 
             //-------------------- everything is done to refresh fluent data -----------------------
 
-            // now wait a second and go on...
-
-            long start = System.currentTimeMillis();
-            while(start + 300 >= System.currentTimeMillis());
-            popupText = "Reading data COMPLETED!\n100%";
-            publishProgress(100);
-            start = System.currentTimeMillis();
-            while(start + 1500 >= System.currentTimeMillis());
+            dialogMessage = "Fourier benchmark\n|=====================|";
 
             return null;
 
         } // of doInBackground(Integer... position)
+
+        // do this to update processing status of async task!
+        protected void onProgressUpdate(Integer... progress) {
+
+            //Log.d("PROGRESS:",progress[0].toString());
+            this.dialog.setMessage(dialogMessage);
+
+        } // onProgressUpdate(Integer... progress)
 
         // do this with the UI AFTER processing async task!
         @Override
@@ -187,42 +203,21 @@ public class MainActivity extends Activity {
             // put global device properties
             listDataChild.put(listDataHeader.get(0), deviceList);
 
-            // put storage results
-            listDataChild.put( listDataHeader.get(3), storageResultList );
-
             // put RAM results
             listDataChild.put( listDataHeader.get(2), ramResultList );
+
+            // put storage results
+            listDataChild.put( listDataHeader.get(3), storageResultList );
 
             // put benchmark results
             listDataChild.put( listDataHeader.get(5), benchResultList );
 
             listAdapter.notifyDataSetChanged();
-            myPopupView.setVisibility(View.INVISIBLE);
-            myProgressBar.setVisibility(View.INVISIBLE);
-            myFolie.setVisibility(View.INVISIBLE);
-
+            
+            if (dialog.isShowing()) {
+               dialog.dismiss();
+            }
         } // of onPostExecute(Void p)
-
-        // do this with the UI BEFORE processing async task!
-        @Override
-        protected void onPreExecute() {
-
-            myPopupView.setText("Reading System data!\nPlease wait a moment... 0%");
-            myPopupView.setVisibility(View.VISIBLE);
-            myProgressBar.setVisibility(View.VISIBLE);
-            myFolie.setVisibility(View.VISIBLE);
-
-        } // of onPreExecute()
-
-        // do this to update processing status of async task!
-        protected void onProgressUpdate(Integer... progress) {
-
-            //Log.d("PROGRESS:",progress[0].toString());
-
-            myPopupView.setText(popupText);
-            myProgressBar.setProgress(Integer.valueOf(progress[0]));
-
-        } // onProgressUpdate(Integer... progress)
 
     } // of readNewValuesClass----------------------------------------------------------------------
 
@@ -251,12 +246,12 @@ public class MainActivity extends Activity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                new readNewValuesClass().execute();
+                new readNewValuesClass(this).execute();
                 // important to update the view after the list ist updated!
                 listAdapter.notifyDataSetChanged();
                 return true;
             case R.id.action_info:
-                showInfo(getString(R.string.main_app) +"\n"
+               showInfo(getString(R.string.main_app) +"\n"
                          + "version " + getString(R.string.app_version) + "\n"
                          + "\n\u00A9 GU Hoffmann 2018");
                 return true;
@@ -289,9 +284,6 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         // set up the progress window popup
-        myPopupView = (TextView) findViewById(R.id.my_popup);
-        myProgressBar = (ProgressBar) findViewById(R.id.myProgressBar);
-        myFolie = (TextView) findViewById(R.id.my_folie);
 
         //=============== CONSTRUCTION OF LISTVIEW AND CORESSPONDING LISTENERS! ====================
 
@@ -305,18 +297,11 @@ public class MainActivity extends Activity {
         listAdapter = new com.uweandapp.MySysScan3.MyExpandableListAdapter(this, listDataHeader, listDataChild);
         expListView.setAdapter(listAdapter);
 
-        //!!!!!!!!!!!!!!! Must be put down here to display menu items in toolbar !!!!!!!!!!!!!!!!!!!
-/*
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(mToolbar);
-        // disable automatic title display in toolbar!
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
-
         //============= READ THE UPDATABLE DATA FOR THE FIRST TIME AT STARTUP!!! ===================
 
         // async tasks must always be newly constructed and can run only once!
         // otherwise you'll get an runtime exception!!!
-        new readNewValuesClass().execute();
+        new readNewValuesClass(this).execute();
 
         // important to update the view after the list ist updated!
         listAdapter.notifyDataSetChanged();
