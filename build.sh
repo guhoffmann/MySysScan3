@@ -177,7 +177,7 @@ clear
 #COPTIONS="-warn:-allDeprecation"
 
 ##########################################################################
-###################### Compile and create app ############################
+###################### Compi2le and create app ############################
 ##########################################################################
 
 if [ $ITEM != "$APPNAME-Run-without-compile" ]\
@@ -298,3 +298,4 @@ echo -e "\nTime spent:\n\n"$(echo $COMPILEZEIT " " $STARTZEIT | awk '{print($1-$
 echo -e $(echo $BUILDZEIT " " $COMPILEZEIT | awk '{print($1-$2)}')" seconds for creating & signing apk."
 echo -e $(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for whole build process.\n"
 echo -e $BLUE"* $SCRIPTNAME: working on $APPNAME FINISHED! *"$WHITE
+

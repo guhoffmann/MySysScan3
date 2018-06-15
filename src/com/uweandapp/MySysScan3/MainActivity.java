@@ -75,7 +75,8 @@ public class MainActivity extends Activity {
         @Override
         protected void onPreExecute() {
             this.dialog.setTitle("Reading System data...");
-            this.dialog.setMessage("Preparing\n|____________________|");
+            //this.dialog.setMessage("Preparing\n░░░░░░░░░░░░░░░░░░░░");
+            this.dialog.setMessage("Preparing\n◼◼◼◼◼◼◼◼◼◼");
             this.dialog.show();
         } // of onPreExecute()
 
@@ -85,7 +86,7 @@ public class MainActivity extends Activity {
 
             //-------------- everything that must be done to refresh fluent data -------------------
 
-            dialogMessage = "Getting OS data\n|=____________________|";
+            dialogMessage = "Getting OS data\n◻◼◼◼◼◼◼◼◼◼";
             publishProgress(10);
 
             // get device informations
@@ -103,7 +104,7 @@ public class MainActivity extends Activity {
                 deviceList.add("Host-IP|" + MyTools.getIp());
             //}
 
-            dialogMessage = "Getting storage information\n|=====________________|";
+            dialogMessage = "Getting storage information\n◻◻◼◼◼◼◼◼◼◼";
             publishProgress(20);
             
             // get storage informations
@@ -158,7 +159,7 @@ public class MainActivity extends Activity {
                             + ")\n" +  MyTools.calcAmount(availableExternalStorage) + "B available");
             }
 
-            dialogMessage = "Getting RAM information\n|=======______________|";
+            dialogMessage = "Getting RAM information\n◻◻◻◻◼◼◼◼◼◼";
             publishProgress(30);
             
             ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
@@ -166,23 +167,23 @@ public class MainActivity extends Activity {
             ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
             ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
             
-            dialogMessage = "Primes benchmark\n|=========____________|";
+            dialogMessage = "Primes benchmark\n◻◻◻◻◻◼◼◼◼◼";
             publishProgress(40);
             MyTools.getPrimBench(500);
-            dialogMessage = "Primes benchmark\n|============_________|";
+            dialogMessage = "Primes benchmark\n◻◻◻◻◻◻◻◼◼◼";
             publishProgress(50);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
             
-            dialogMessage = "Fourier benchmark\n|==============_______|";
+            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◼◼";
             publishProgress(60);
             MyTools.getSquareBench(500);
-            dialogMessage = "Fourier benchmark\n|===================__|";
+            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◻◼";
             publishProgress(70);
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
 
             //-------------------- everything is done to refresh fluent data -----------------------
 
-            dialogMessage = "Fourier benchmark\n|=====================|";
+            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◻◻";
 
             return null;
 
