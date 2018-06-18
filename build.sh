@@ -23,7 +23,7 @@ if [ $(uname -o) = "Android" ];then
    # TERMUX: See if grep comes from busybox or GNU!
    # For GNU grep set --color marking on
    if [ -f $PREFIX/bin/grep ];then
-      GREP='$PREFIX/bin/grep --color'
+      GREP="$PREFIX/bin/grep --color"
    else
       GREP="grep"
    fi
@@ -275,22 +275,36 @@ BUILDZEIT=$(date +%s)
 ################ Start at last if selected to do so ######################
 ##########################################################################
 
+# Configure install and run commands
+
+if [ $HOSTNAME != "Android" ];then
+   UNINSTALL="adb uninstall"
+   INSTALL="adb install"
+   STOP="adb shell am force-stop"
+   RUN="adb shell am start -n"
+else
+   UNINSTALL="pm uninstall"
+   INSTALL="pm install"
+   STOP="am force-stop"
+   RUN="am start"
+fi
+
 case $ITEM in
 
 	"$APPNAME-New_with_test_on_device")
 		echo -e "\n=> Removing previous App installed...\n"
-		adb uninstall $PACKAGENAME.$APPNAME
+		$UNINSTALL $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK...\n"
-		adb install $PROJECTDIR/bin/$APKNAME.apk
-		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+		$INSTALL $PROJECTDIR/bin/$APKNAME.apk
+		$RUN $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 		
 	"$APPNAME-New_with_test_on_device_with_LogCat")
 		echo -e "\n=> Removing previous App installed...\n"
-		adb uninstall $PACKAGENAME.$APPNAME
+		$UNINSTALL $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK for debugging...\n"
-		adb install $PROJECTDIR/bin/$APKNAME.apk
-		adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+		$INSTALL $PROJECTDIR/bin/$APKNAME.apk
+		$RUN $PACKAGENAME.$APPNAME/.MainActivity
 		PID=$(adb jdwp)
 		echo -e "App Process-ID: $PID"
 		#adb logcat > logcat.txt
@@ -298,8 +312,8 @@ case $ITEM in
       break;;
       
    "$APPNAME-App-Run-without-compile")
-      adb shell am force-stop $PACKAGENAME.$APPNAME
-      adb shell am start -n $PACKAGENAME.$APPNAME/.MainActivity
+      $STOP $PACKAGENAME.$APPNAME
+      $RUN2 $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 esac
 
