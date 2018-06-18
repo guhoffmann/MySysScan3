@@ -8,19 +8,29 @@
 #
 ##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.15"
+SCRIPTNAME="buildapp 18.06.18"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
 BLUE="\033[1;34m"
 
 clear
+
 echo -e $GREEN"*** $SCRIPTNAME ***\n"$WHITE
 
 if [ $(uname -o) = "Android" ];then
    HOSTNAME="Android"
+   # TERMUX: See if grep comes from busybox or GNU!
+   # For GNU grep set --color marking on
+   if [ -f $PREFIX/bin/grep ];then
+      GREP='$PREFIX/bin/grep --color'
+   else
+      GREP="grep"
+   fi
 else
    HOSTNAME=$(cat /etc/hostname)
+   # highlight some things with GNU grep!
+   GREP="grep --color"
 fi
 
 echo -e $BLUE"\nHostname: $HOSTNAME\n"$WHITE
@@ -196,7 +206,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
 
    echo -e $GREEN"\n=> Compiling java..."$WHITE
    $JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
-        $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/*.java 2>&1|grep --color -E '^|WARNING|ERROR'
+        $PROJECTDIR/src/*.java 2>&1|$GREP -E '^|WARNING|ERROR'
 
 
    COMPILEZEIT=$(date +%s)

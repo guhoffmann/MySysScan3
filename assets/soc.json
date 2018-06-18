@@ -872,7 +872,7 @@
 "gpu_series": "cpuinfo_android_gpu_series_qualcomm_adreno"
 },
 "Qualcomm Snapdragon APQ8017":   {
-"soc_name": "Qualcomm Snapdragon APQ8017",
+"soc_name": "Qualcomm Snapdragon 425 APQ8017",
 "chipset_model": "8017",
 "chipset_series": "cpuinfo_arm_chipset_series_qualcomm_apq",
 "gpu_name": "Qualcomm Adreno 308",
