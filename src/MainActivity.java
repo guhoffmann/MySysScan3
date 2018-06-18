@@ -1,6 +1,6 @@
 package com.uweandapp.MySysScan3;
 
-import MyTools.*;
+//import MyTools.*;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.app.ProgressDialog;
@@ -63,7 +63,9 @@ public class MainActivity extends Activity {
         /** progress dialog to show user that the backup is processing. */
         private ProgressDialog dialog;
         String dialogMessage;
-        /** application context. */
+        /** application context.
+         * DO NOT REMOVE THIS DESPITE THE COMPILER WARNING IT'S NOT USED!!!
+         * This code will not work without this activity statement. */
         private Activity activity;
 
         public readNewValuesClass(Activity activity) {

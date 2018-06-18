@@ -133,12 +133,19 @@ CLEANFUNC="
 
 # Now go on and select what to do...
 
-MENU="$APPNAME-New \
-      $APPNAME-New_with_test_on_device \
-      $APPNAME-New_with_test_on_device_with_LogCat \
-      $APPNAME-Run-without-compile \
-      $APPNAME-Clean \
-      Abbruch"
+if [ $HOSTNAME != "Android" ];then
+   MENU="$APPNAME-New \
+         $APPNAME-New_with_test_on_device \
+         $APPNAME-New_with_test_on_device_with_LogCat \
+         $APPNAME-Run-without-compile \
+         $APPNAME-Clean \
+         Abbruch"
+else
+   MENU="$APPNAME-New \
+         $APPNAME-Run-without-compile \
+         $APPNAME-Clean \
+         Abbruch"
+fi
       
 PS3="Auswahl:"
 COLUMNS=1
@@ -184,7 +191,7 @@ clear
 ####### Specify compiler options to get only useful messages #############
 ##########################################################################
 
-#COPTIONS="-warn:-allDeprecation"
+COPTIONS="-warn:-allDeprecation"
 
 ##########################################################################
 ###################### Compi2le and create app ############################
