@@ -1,6 +1,6 @@
 package com.uweandapp.MySysScan3;
 
-//import MyTools.*;
+import MyTools.*;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.app.ProgressDialog;
