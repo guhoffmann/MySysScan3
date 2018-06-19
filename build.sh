@@ -318,7 +318,7 @@ case $ITEM in
       adb logcat|grep $PID
       break;;
       
-   "$APPNAME-App-Run-without-compile")
+   "$APPNAME-Run-without-compile")
       $STOP $PACKAGENAME.$APPNAME
       $RUN $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
