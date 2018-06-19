@@ -8,7 +8,7 @@
 #
 ##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.18"
+SCRIPTNAME="buildapp 18.06.19"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -318,9 +318,9 @@ case $ITEM in
       adb logcat|grep $PID
       break;;
       
-   "$APPNAME-App-Run-without-compile")
+   "$APPNAME-Run-without-compile")
       $STOP $PACKAGENAME.$APPNAME
-      $RUN2 $PACKAGENAME.$APPNAME/.MainActivity
+      $RUN $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 esac
 
