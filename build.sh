@@ -1,14 +1,14 @@
 #!/bin/bash
 
-################## build.sh (C) GU Hoffmann 05.06.2018 ###################
+################## bui1ld.sh (C) GU Hoffmann 05.06.2018 ###################
 #
 # Update the basic Android App with commandline tools on a X86-PC,
 # Raspberry Pi or an Android device running TERMUX!
-#                        COMPLETE-VERSION
+#                          COMPLETE-VERSION
 #
 ##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.18"
+SCRIPTNAME="buildapp 18.06.19"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -320,7 +320,7 @@ case $ITEM in
       
    "$APPNAME-App-Run-without-compile")
       $STOP $PACKAGENAME.$APPNAME
-      $RUN2 $PACKAGENAME.$APPNAME/.MainActivity
+      $RUN $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 esac
 
