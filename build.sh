@@ -1,4 +1,4 @@
-#!/bin/bash
+1#!/bin/bash
 
 ################## bui1ld.sh (C) GU Hoffmann 05.06.2018 ###################
 #
@@ -43,7 +43,7 @@ echo -e $BLUE"\nHostname: $HOSTNAME\n"$WHITE
 # Select SDK 23 = Android 6.0
 # Necessary for using Camera2-Api!!!
 
-PLATFORM="android-23-6.0"
+PLATFORM_SDK="android-23-6.0.jar"
 
 # Names of app,package and apk to create
 
@@ -62,7 +62,7 @@ PACKAGENAME="com.uweandapp"
 case $HOSTNAME in
 
    B590)
-      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM/android.jar
+      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=/media/uwe/backup/data/Android/Sdk/build-tools/26.0.1/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
@@ -75,7 +75,7 @@ case $HOSTNAME in
       ;;
       
    senior-medion)
-      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM/android.jar
+      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/26.0.1/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
@@ -88,7 +88,7 @@ case $HOSTNAME in
       ;;
 
    gamepi)
-      SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM/android.jar
+      SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=""
       PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
@@ -101,7 +101,7 @@ case $HOSTNAME in
       ;;
 
    Android)
-      SDK=~/uwe/sparSDK/$PLATFORM/android.jar
+      SDK=~/uwe/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=""
       PROJECTDIR=~/uwe/$APPNAME
