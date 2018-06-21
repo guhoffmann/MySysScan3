@@ -1,1 +1,9 @@
+# Ignore all those things
 dummy.txt
+*.geany
+.geanyprj
+src/com
+output/
+*.dex
+*.apk
+*.keystore

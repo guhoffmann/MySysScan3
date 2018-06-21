@@ -8,7 +8,7 @@
 #
 ##########################################################################2
 
-SCRIPTNAME="buildapp 18.06.19"
+SCRIPTNAME="buildapp 18.06.21"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -125,7 +125,7 @@ esac
 # Clean project
 
 CLEANFUNC="
-           rm $PROJECTDIR/bin/*.*; \
+           rm $PROJECTDIR/output/*.*; \
            rm -r $PROJECTDIR/obj/*.*; \
            rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
            find -L $PROJECTDIR -name \"classes.dex\" -delete \
@@ -194,13 +194,19 @@ clear
 COPTIONS="-warn:-allDeprecation"
 
 ##########################################################################
-###################### Compi2le and create app ############################
+###################### Compile and create app ############################
 ##########################################################################
 
 if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    && [ $ITEM != "$APPNAME-Clean" ]; then
 
    STARTZEIT=$(date +%s)
+   
+   # Create output dir if not present
+   
+   if [ ! -d $PROJECTDIR/output ];then
+        mkdir $PROJECTDIR/output
+   fi
 
    # compile all resources in projects res dir to R.java
    # for accessing ressources from Java source code
@@ -221,7 +227,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # Make a dex file
 
    echo -e $GREEN"\n=> Making Dex..."$WHITE
-   $DX --dex --output=$PROJECTDIR/bin/classes.dex $PROJECTDIR/obj
+   $DX --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 
    #If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
    # you use old build tools and DX try to translate java 1.7 rather than 1.8.
@@ -232,11 +238,11 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # Put everything in an APK
 
    echo -e $GREEN"\n=> Making unsigned APK..."$WHITE
-   $AAPT package -f -m -F $PROJECTDIR/bin/$APKNAME.unaligned.apk \
+   $AAPT package -f -m -F $PROJECTDIR/output/$APKNAME.unaligned.apk \
          -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
          
-   cp $PROJECTDIR/bin/classes.dex .
-   $AAPT add $PROJECTDIR/bin/$APKNAME.unaligned.apk classes.dex
+   cp $PROJECTDIR/output/classes.dex .
+   $AAPT add $PROJECTDIR/output/$APKNAME.unaligned.apk classes.dex
 
    ##### SIGNING #####
    # Sign APK, it's a MUST if you wanna install on phone!!!
@@ -259,18 +265,18 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
               -keyalg RSA -keysize 2048
 
       #$APKSIGNER sign --ks $PROJECTDIR/$APPNAME.keystore --ks-pass pass:debug-test \
-      #            $PROJECTDIR/bin/$APKNAME.unaligned.apk
+      #            $PROJECTDIR/output/$APKNAME.unaligned.apk
       $APKSIGNER -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
-                 -storepass debug-test $PROJECTDIR/bin/$APKNAME.unaligned.apk test1
+                 -storepass debug-test $PROJECTDIR/output/$APKNAME.unaligned.apk test1
 
       # Align the APK (only works after signing)
 
-      $ZIPALIGN -f 4 $PROJECTDIR/bin/$APKNAME.unaligned.apk \
-             $PROJECTDIR/bin/$APKNAME.apk
+      $ZIPALIGN -f 4 $PROJECTDIR/output/$APKNAME.unaligned.apk \
+             $PROJECTDIR/output/$APKNAME.apk
    else
       $APKSIGNER -p debug-test $PROJECTDIR/$APPNAME.keystore \
-      $PROJECTDIR/bin/$APKNAME.unaligned.apk \
-      $PROJECTDIR/bin/$APKNAME.apk
+      $PROJECTDIR/output/$APKNAME.unaligned.apk \
+      $PROJECTDIR/output/$APKNAME.apk
       
    fi # of if [ $HOSTNAME != "Android" ]
 
@@ -302,7 +308,7 @@ case $ITEM in
 		echo -e "\n=> Removing previous App installed...\n"
 		$UNINSTALL $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK...\n"
-		$INSTALL $PROJECTDIR/bin/$APKNAME.apk
+		$INSTALL $PROJECTDIR/output/$APKNAME.apk
 		$RUN $PACKAGENAME.$APPNAME/.MainActivity
 		break;;
 		
@@ -310,7 +316,7 @@ case $ITEM in
 		echo -e "\n=> Removing previous App installed...\n"
 		$UNINSTALL $PACKAGENAME.$APPNAME
 		echo -e "\n=> Installing and starting APK for debugging...\n"
-		$INSTALL $PROJECTDIR/bin/$APKNAME.apk
+		$INSTALL $PROJECTDIR/output/$APKNAME.apk
 		$RUN $PACKAGENAME.$APPNAME/.MainActivity
 		PID=$(adb jdwp)
 		echo -e "App Process-ID: $PID"
