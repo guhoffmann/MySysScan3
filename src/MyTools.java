@@ -450,6 +450,7 @@ public class MyTools {
 
             Camera camera;
             Camera.Size camRes;
+            List<Size> cameraSizes;
 
             try {
 
@@ -465,14 +466,17 @@ public class MyTools {
                     else result = result + "Back: ";
 
                     camRes = camera.getParameters().getPictureSize();
+                    cameraSizes =  camera.getParameters().getSupportedPictureSizes();
+                    Size mySize = cameraSizes.get(0);
+                    Log.d("CAMRESULT:", mySize.toString());
                     result = result + camRes.width + " x " + camRes.height
-                            + " (" + calcAmount(camRes.width * camRes.height) + "Pixel)\n";
+                            + " (" + calcAmount(camRes.width * camRes.height) + "Pixel) old Camera-Infos!\n";
 
                 }
 
             } catch (Exception e) {
 
-                result = "no old cameras found!";
+                result = "no cameras found!";
 
             }
 

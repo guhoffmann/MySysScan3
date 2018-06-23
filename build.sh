@@ -1,4 +1,4 @@
-1#!/bin/bash
+#!/bin/bash
 
 ################## bui1ld.sh (C) GU Hoffmann 05.06.2018 ###################
 #
@@ -6,9 +6,9 @@
 # Raspberry Pi or an Android device running TERMUX!
 #                          COMPLETE-VERSION
 #
-##########################################################################2
+###########################################################################
 
-SCRIPTNAME="buildapp 18.06.21"
+SCRIPTNAME="buildapp 18.06.23"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -335,4 +335,3 @@ echo -e "\nTime spent:\n\n"$(echo $COMPILEZEIT " " $STARTZEIT | awk '{print($1-$
 echo -e $(echo $BUILDZEIT " " $COMPILEZEIT | awk '{print($1-$2)}')" seconds for creating & signing apk."
 echo -e $(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for whole build process.\n"
 echo -e $BLUE"* $SCRIPTNAME: working on $APPNAME FINISHED! *"$WHITE
-
