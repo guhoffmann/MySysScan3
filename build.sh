@@ -4,11 +4,11 @@
 #
 # Update the basic Android App with commandline tools on a X86-PC,
 # Raspberry Pi or an Android device running TERMUX!
-#                          COMPLETE-VERSION
+#                          2COMPLETE-VERSION
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.06.23"
+SCRIPTNAME="buildapp 18.06.24"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"

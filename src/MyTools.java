@@ -130,7 +130,7 @@ public class MyTools {
 
     } // of getCpu()
 
-    /** Return processor info from cpuinfo as String ***********************************************
+    /** Return IP adress ***************************************************************************
      *
      * @return String
      */
@@ -199,7 +199,7 @@ public class MyTools {
                 } else {  // new Frequency found!
                     cpuCores.put(calcAmount(value),1);
                 }
-            }
+            }// of for (int i = 0;i< Integer.parseInt(...
 
         } else { //get system frequency infos for android emulator
 
@@ -449,11 +449,9 @@ public class MyTools {
         } else { // // approach for SDK < 21
 
             Camera camera;
-            Camera.Size camRes;
-            List<Size> cameraSizes;
+            Size cameraSize;
 
             try {
-
 
                 for(int i=0;i<Camera.getNumberOfCameras();i++){
 
@@ -464,14 +462,10 @@ public class MyTools {
                     if (cameraInfo.facing == CameraInfo.CAMERA_FACING_FRONT)
                         result = result + "Front: ";
                     else result = result + "Back: ";
-
-                    camRes = camera.getParameters().getPictureSize();
-                    cameraSizes =  camera.getParameters().getSupportedPictureSizes();
-                    Size mySize = cameraSizes.get(0);
-                    Log.d("CAMRESULT:", mySize.toString());
-                    result = result + camRes.width + " x " + camRes.height
-                            + " (" + calcAmount(camRes.width * camRes.height) + "Pixel) old Camera-Infos!\n";
-
+                    // To lazy to analyze all resolutions, take the first in list...
+                    cameraSize =  camera.getParameters().getSupportedPictureSizes().get(0);
+                    result = result + cameraSize.width + " x " + cameraSize.height
+                            + " (" + calcAmount(cameraSize.width * cameraSize.height) + "Pixel)\n";
                 }
 
             } catch (Exception e) {
