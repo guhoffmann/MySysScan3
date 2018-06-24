@@ -235,21 +235,26 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    #javac command:
    #javac -d obj -source 1.7 -target 1.7 ...
 
-   # Put everything in an APK
+   ############################## Put everything in an APK #########################################
 
    echo -e $GREEN"\n=> Making unsigned APK..."$WHITE
+   
+   # First add resources to unaligned apk
    $AAPT package -f -m -F $PROJECTDIR/output/$APKNAME.unaligned.apk \
-         -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml -S $PROJECTDIR/res -I $SDK
-         
-   cp $PROJECTDIR/output/classes.dex .
+         -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
+         -S $PROJECTDIR/res -I $SDK
+          
+   # Now add DEX file to unaligned apk - don't know why I couldn't accomplish
+   # this at once with command above - subject for research...
+   cd $PROJECTDIR/output
    $AAPT add $PROJECTDIR/output/$APKNAME.unaligned.apk classes.dex
-
-   ##### SIGNING #####
+   cd $PROJECTDIR
+   
+   ###################################### SIGNING ##################################################
    # Sign APK, it's a MUST if you wanna install on phone!!!
-   # Changed from 'apksigner' to 'jarsigner' on PC's/Pi to get apk's
-   # installed in > Android 7.0 devices! If working with Android in TERMUX,
-   # only TERMUX apksigner is used, it makes keystore generation,
-   # signing and aligning in one turn!
+   # Changed apksigner to jarsigner on PC/Pi to get apk's installed in > Android 6 devices!
+   # If working with Android/TERMUX, only TERMUX apksigner is used.
+   # It makes keystore generation, signing and aligning in one turn!
 
    echo -e $GREEN"\n=> Signing and aligning APK..."$WHITE
 
