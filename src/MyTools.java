@@ -170,7 +170,7 @@ public class MyTools {
 
     } // of getHardware()
 
-    /** Calc processor frequency and return formatted String ***************************************
+    /** Calc processor number and frequencies and return formatted String **************************
      *
      * @return String
      */
@@ -215,6 +215,41 @@ public class MyTools {
         return retString;
 
     } // of getCpuCores()
+    
+    /** Calc frequency of each core and return formatted String ************************************
+     *
+     * @return String
+     */
+
+    public static String getCpuCoresFreqs(String androidDevice) {
+
+        String cmdLine;
+        String[] inString;
+        long value;
+        int helpInt;
+        String retString = "";
+
+        if (androidDevice.equals("real") ) { // get system frequency infos for real device
+
+            // Search for Cores and frequencies in system directories
+            for (int i = 0;i< Integer.parseInt(getPipedCmdLine("ls -d /sys/devices/system/cpu/cpu?|grep -c 'cpu'"));i++) {
+
+                cmdLine = getPipedCmdLine("cat /sys/devices/system/cpu/cpu" +Integer.toString(i) +"/cpufreq/scaling_cur_freq");
+                retString = retString + calcAmount(Long.parseLong(cmdLine) * 1000) + " ";
+
+            }// of for (int i = 0;i< Integer.parseInt(...
+
+        } else { //get system frequency infos for android emulator
+
+            cmdLine = getPipedCmdLine("cat /proc/cpuinfo|grep -w 'cpu MHz'");
+            inString = cmdLine.trim().split(":");
+            value = Math.round(Float.parseFloat(inString[1])*1000.0*1000.0);
+            cpuCores.put(calcAmount(value),1);
+        }
+
+        return retString;
+
+    } // of getCpuCoresFreqs()
 
     /** Read size of RAM ***************************************************************************
      *

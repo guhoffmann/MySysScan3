@@ -3,6 +3,7 @@ package com.uweandapp.MySysScan3;
 import MyTools.*;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.app.ProgressDialog;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,12 +37,21 @@ public class MainActivity extends Activity {
     long androidDataStorageUsed;
     long totalExternalStorage;
     long freeExternalStorage;
+    int periodicTime = 1000;
 
     private com.uweandapp.MySysScan3.MyExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
     private JSONObject socObject;
+    
+    private List<String> ramResultList     = new ArrayList<String>();
+    private List<String> deviceList        = new ArrayList<String>();
+    private List<String> benchResultList   = new ArrayList<String>();
+    private List<String> storageResultList = new ArrayList<String>();
+    private List<String> socList           = new ArrayList<String>();
+        
+    private Handler periodicHandler;
 
     /** Class for async task calculating benchmarks and new values *********************************
      *
@@ -56,17 +66,15 @@ public class MainActivity extends Activity {
 
     private class readNewValuesClass extends AsyncTask<Void, Integer, Void> {
 
-        private List<String> deviceList        = new ArrayList<String>();
-        private List<String> benchResultList   = new ArrayList<String>();
-        private List<String> ramResultList     = new ArrayList<String>();
-        private List<String> storageResultList = new ArrayList<String>();
         /** progress dialog to show user that the backup is processing. */
         private ProgressDialog dialog;
         String dialogMessage;
-        /** application context.
+        
+        /** application context !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
          * DO NOT REMOVE THIS DESPITE THE COMPILER WARNING IT'S NOT USED!!!
          * This code will not work without this activity statement. */
         private Activity activity;
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         public readNewValuesClass(Activity activity) {
            this.activity = activity;
@@ -77,6 +85,12 @@ public class MainActivity extends Activity {
         // do this with the UI BEFORE processing async task!
         @Override
         protected void onPreExecute() {
+            
+            ramResultList.clear();
+            deviceList.clear();
+            benchResultList.clear();
+            storageResultList.clear();
+            
             this.dialog.setTitle("Reading System data...");
             //this.dialog.setMessage("Preparing\n░░░░░░░░░░░░░░░░░░░░");
             this.dialog.setMessage("Preparing\n◼◼◼◼◼◼◼◼◼◼");
@@ -223,8 +237,28 @@ public class MainActivity extends Activity {
             }
         } // of onPostExecute(Void p)
 
-    } // of readNewValuesClass----------------------------------------------------------------------
-
+    } // of readNewValuesClass ---------------------------------------------------------------------
+    
+    /** Class repating code periodically ***********************************************************
+    *
+    */
+     
+    private Runnable periodicalCode = new Runnable() {
+        @Override
+        public void run() {
+          // Do something here on the main thread
+          ramResultList.clear();
+          ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
+          ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
+          ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
+          ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
+          listDataChild.put( listDataHeader.get(2), ramResultList );
+          listAdapter.notifyDataSetChanged();
+          // repeat code every periodicTime milliseconds
+          periodicHandler.postDelayed(this, periodicTime);
+        }
+    }; // of periodicalCode ------------------------------------------------------------------------
+    
     //============================== START / INITIALIZE THE APP ====================================
     //
     // Do everything that must be done at the start of the APP!
@@ -309,7 +343,11 @@ public class MainActivity extends Activity {
 
         // important to update the view after the list ist updated!
         listAdapter.notifyDataSetChanged();
-
+        
+        // Create handler and start it for periodic refreshing of things...
+        periodicHandler = new Handler();
+        periodicHandler.post(periodicalCode);
+        
     } // of onCreate(Bundle savedInstanceState) ----------------------------------------------------
 
     //========================== PREPARE LIST DATA AND BUILD LIST ==================================
@@ -372,18 +410,18 @@ public class MainActivity extends Activity {
         }
 
         listDataHeader.add(" SoC/Processor");
-        List<String> soc = new ArrayList<String>();
         if (MyTools.androidDevice.equals("real")) {
-            soc.add("Hardware|" + cpuInfoHardware + socResult);
+            socList.add("Hardware|" + cpuInfoHardware + socResult);
         }
-        soc.add("Board|"  + android.os.Build.HARDWARE.trim() + " " + Build.BOARD.trim());
-        soc.add("CPU|" + MyTools.getCpu().trim());
+        socList.add("Board|"  + android.os.Build.HARDWARE.trim() + " " + Build.BOARD.trim());
+        socList.add("CPU|" + MyTools.getCpu().trim());
         int cores = Integer.parseInt(MyTools.getPipedCmdLine("cat /proc/cpuinfo|grep -c '^processor'"));
-        soc.add("Core(s)|" + cores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
+        socList.add("Core(s)|" + cores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
+        socList.add("Freqs|" + MyTools.getCpuCoresFreqs(MyTools.androidDevice) );
         if ( socResult != "" ) {
-            soc.add("GPU|" + "guessed: " + gpuResult);
+            socList.add("GPU|" + "guessed: " + gpuResult);
         }
-        listDataChild.put(listDataHeader.get(1), soc);
+        listDataChild.put(listDataHeader.get(1), socList);
 
         //----------------------------- RAM informations -------------------------------------------
 
