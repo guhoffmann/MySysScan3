@@ -2,6 +2,7 @@ package MyTools;
 
 import SystemCommandExecutor.*;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -36,6 +37,9 @@ public class MyTools {
     public static String androidDevice; // "real"=real device, "emulator"=emulator, "virtualbox"
     private static HashMap<String, Integer> cpuCores;
     public static int numCores;
+    private static ActivityManager.MemoryInfo memoryInfo;
+    private static ActivityManager activityManager;
+        
 
     // Code names for the different Android Versions
 
@@ -50,10 +54,11 @@ public class MyTools {
      *
      */    
             
-    public static void init() {
+    public static void init(Context context) {
         
         numCores = Integer.parseInt(getPipedCmdLine("ls -d /sys/devices/system/cpu/cpu?|grep -c 'cpu'"));
-        
+        memoryInfo = new ActivityManager.MemoryInfo();
+        activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
     }
 
     /** Get text output of a piped terminal command ************************************************
@@ -282,7 +287,7 @@ public class MyTools {
 
     } // of getCpuCoresFreqs()
 
-    /** Read size of RAM ***************************************************************************
+    /** Read size of RAM using meminfo *************************************************************
      *
      * @param choice type of RAM
      * @return G,M,K formatted output of RAM (total, free, used)
@@ -322,6 +327,39 @@ public class MyTools {
 
     } // of getRam(int choice)
 
+    /** Read size of RAM using Java API ************************************************************
+     *
+     * @param choice type of RAM
+     * @return G,M,K formatted output of RAM (total, free, used)
+     */
+
+    public static String getRam2(int choice) {
+
+        String cmdLine;
+        String[] inString;
+        long value;
+
+        switch(choice){
+            case 0:
+                activityManager.getMemoryInfo(memoryInfo);
+                value = memoryInfo.totalMem;
+                break;
+            case 1:
+                activityManager.getMemoryInfo(memoryInfo);
+                value = memoryInfo.availMem;
+                break;
+            case 2:
+                activityManager.getMemoryInfo(memoryInfo);
+                value = (memoryInfo.totalMem - memoryInfo.availMem);
+                break;
+            default: value = 0;
+                break;
+        }
+
+        return calcAmount(value);
+
+    } // of getRam2(int choice)
+    
     /** Read used size of internal data partition on real Android device ***************************
      *
      * @return long

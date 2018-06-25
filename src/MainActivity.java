@@ -39,6 +39,7 @@ public class MainActivity extends Activity {
     long totalExternalStorage;
     long freeExternalStorage;
     int periodicTime = 2000; // ~2s time difference between two measurements!
+    int firstPeriodic = 0;
 
     private com.uweandapp.MySysScan3.MyExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
@@ -181,10 +182,9 @@ public class MainActivity extends Activity {
             dialogMessage = "Getting RAM information\n◻◻◻◻◼◼◼◼◼◼";
             publishProgress(30);
             
-            ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
-            ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
-            ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
-            ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
+            ramResultList.add("Total|" + MyTools.getRam2(0) + "B on device" );
+            ramResultList.add("Used|" + MyTools.getRam2(2) + "B" );
+            ramResultList.add("Free|" + MyTools.getRam2(1) + "B");
             
             dialogMessage = "Primes benchmark\n◻◻◻◻◻◼◼◼◼◼";
             publishProgress(40);
@@ -237,6 +237,13 @@ public class MainActivity extends Activity {
             if (dialog.isShowing()) {
                dialog.dismiss();
             }
+            // periodic handler must be called AFTER initialisation
+            // of all list fields it should later work with!!!
+            // So it's invoked here for the first time.
+            if (firstPeriodic == 0) {
+                periodicHandler.post(periodicalCode);
+                firstPeriodic = 1;
+            }
         } // of onPostExecute(Void p)
 
     } // of readNewValuesClass ---------------------------------------------------------------------
@@ -248,13 +255,10 @@ public class MainActivity extends Activity {
     private Runnable periodicalCode = new Runnable() {
         @Override
         public void run() {
-          // Do something here on the main thread
-        /*  ramResultList.clear();
-          ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
-          ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
-          ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
-          ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
-          listDataChild.put( listDataHeader.get(2), ramResultList );*/
+
+          ramResultList.set(1,"Used|" + MyTools.getRam2(2) + "B" );
+          ramResultList.set(2,"Free|" + MyTools.getRam2(1) + "B");
+          listDataChild.put( listDataHeader.get(2), ramResultList );
 
           String freqString = "Freqs|";
           
@@ -314,7 +318,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         // First init tools library
-        MyTools.init();
+        MyTools.init(this);
 
         // get JSON-Object containing the SOC infos
         socObject = MyTools.parseJSONData(this, "soc.json");
@@ -354,13 +358,10 @@ public class MainActivity extends Activity {
         // async tasks must always be newly constructed and can run only once!
         // otherwise you'll get an runtime exception!!!
         new readNewValuesClass(this).execute();
-
-        // important to update the view after the list ist updated!
-        listAdapter.notifyDataSetChanged();
         
         // Create handler and start it for periodic refreshing of things...
         periodicHandler = new Handler();
-        periodicHandler.post(periodicalCode);
+        //periodicHandler.post(periodicalCode);
         
     } // of onCreate(Bundle savedInstanceState) ----------------------------------------------------
 
