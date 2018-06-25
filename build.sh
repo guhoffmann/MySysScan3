@@ -62,7 +62,7 @@ PACKAGENAME="com.uweandapp"
 case $HOSTNAME in
 
    B590)
-      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM_SDK
+      SDK=/home/uwe/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=/media/uwe/backup/data/Android/Sdk/build-tools/26.0.1/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
@@ -75,7 +75,7 @@ case $HOSTNAME in
       ;;
       
    senior-medion)
-      SDK=/home/uwe/MyDevelop/MyAndroid/sparSDK/$PLATFORM_SDK
+      SDK=/home/uwe/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
       BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/26.0.1/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
