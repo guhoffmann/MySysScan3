@@ -12,6 +12,8 @@ import android.os.Environment;
 import android.os.StatFs;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +35,7 @@ public class MyTools {
     static int myToolsKilo = 1000; // multiplier for K,M,G
     public static String androidDevice; // "real"=real device, "emulator"=emulator, "virtualbox"
     private static HashMap<String, Integer> cpuCores;
+    public static int numCores;
 
     // Code names for the different Android Versions
 
@@ -42,6 +45,16 @@ public class MyTools {
             "Ice Cream Sandwich", "Ice Cream Sandwich M.R.1", "Jellybean", "Jellybean M.R.1", "Jellybean M.R.2",
             "Kitkat", "Kitkat Wear", "Lollipop", "Lollipop M.R.1",
             "Marshmallow", "Nougat", "Nougat M.R.1", "Oreo", "Oreo M.R.1","","",""};
+ 
+     /** Call this from calling app to initialize some important values ****************************
+     *
+     */    
+            
+    public static void init() {
+        
+        numCores = Integer.parseInt(getPipedCmdLine("ls -d /sys/devices/system/cpu/cpu?|grep -c 'cpu'"));
+        
+    }
 
     /** Get text output of a piped terminal command ************************************************
      *
@@ -107,8 +120,26 @@ public class MyTools {
 
         return String.format(Locale.US, "%.2f", zaehler*100.0/nenner) + " %";
 
-    } // of calcProz( long zaehler, long nenner )
+    } // public static String calcProz(long zaehler, long nenner)...
 
+    public static String fastRead(String filename) {
+        String line;
+        String retString = "";
+        
+        try {
+            BufferedReader bf = new BufferedReader(new FileReader(filename));
+            while ( (line = bf.readLine()) != null ){
+                retString = retString + line;
+            }
+        
+        } catch (IOException e) {
+            e.printStackTrace();
+            retString = "file not found!";
+        }
+        
+        return retString;
+    } // of public static String fastRead(String filename)...
+    
     /** Return processor info from cpuinfo as String ***********************************************
      *
      * @return String
@@ -235,11 +266,11 @@ public class MyTools {
             for (int i = 0;i< Integer.parseInt(getPipedCmdLine("ls -d /sys/devices/system/cpu/cpu?|grep -c 'cpu'"));i++) {
 
                 cmdLine = getPipedCmdLine("cat /sys/devices/system/cpu/cpu" +Integer.toString(i) +"/cpufreq/scaling_cur_freq");
-                retString = retString + calcAmount(Long.parseLong(cmdLine) * 1000) + " ";
+                retString = retString + String.format(Locale.US, "%05d", Long.parseLong(cmdLine)/1000) + " ";
 
             }// of for (int i = 0;i< Integer.parseInt(...
 
-        } else { //get system frequency infos for android emulator
+        } else { //get system frequency infos for android emulator - not adjusted for timer usage!
 
             cmdLine = getPipedCmdLine("cat /proc/cpuinfo|grep -w 'cpu MHz'");
             inString = cmdLine.trim().split(":");

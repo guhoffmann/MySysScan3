@@ -16,6 +16,7 @@ import android.widget.ExpandableListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +38,7 @@ public class MainActivity extends Activity {
     long androidDataStorageUsed;
     long totalExternalStorage;
     long freeExternalStorage;
-    int periodicTime = 1000;
+    int periodicTime = 2000; // ~2s time difference between two measurements!
 
     private com.uweandapp.MySysScan3.MyExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
@@ -176,6 +177,7 @@ public class MainActivity extends Activity {
                             + ")\n" +  MyTools.calcAmount(availableExternalStorage) + "B available");
             }
 
+
             dialogMessage = "Getting RAM information\n◻◻◻◻◼◼◼◼◼◼";
             publishProgress(30);
             
@@ -247,12 +249,21 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
           // Do something here on the main thread
-          ramResultList.clear();
+        /*  ramResultList.clear();
           ramResultList.add("Total|" + MyTools.getRam(0) + "B on device" );
           ramResultList.add("Used|" + MyTools.getRam(1) + "B" );
           ramResultList.add("Unused|" + MyTools.getRam(2) + " unused by system");
           ramResultList.add("Free|" + MyTools.getRam(3) + "B free for new applications");
-          listDataChild.put( listDataHeader.get(2), ramResultList );
+          listDataChild.put( listDataHeader.get(2), ramResultList );*/
+
+          String freqString = "Freqs|";
+          
+         for (int i = 0;i< MyTools.numCores;i++) {
+            freqString = freqString +" "+MyTools.fastRead("/sys/devices/system/cpu/cpu" + i +"/cpufreq/scaling_cur_freq");
+          }
+          socList.set(4,freqString);
+          listDataChild.put( listDataHeader.get(1), socList);
+          
           listAdapter.notifyDataSetChanged();
           // repeat code every periodicTime milliseconds
           periodicHandler.postDelayed(this, periodicTime);
@@ -301,6 +312,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        // First init tools library
+        MyTools.init();
 
         // get JSON-Object containing the SOC infos
         socObject = MyTools.parseJSONData(this, "soc.json");
@@ -415,8 +429,7 @@ public class MainActivity extends Activity {
         }
         socList.add("Board|"  + android.os.Build.HARDWARE.trim() + " " + Build.BOARD.trim());
         socList.add("CPU|" + MyTools.getCpu().trim());
-        int cores = Integer.parseInt(MyTools.getPipedCmdLine("cat /proc/cpuinfo|grep -c '^processor'"));
-        socList.add("Core(s)|" + cores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
+        socList.add("Core(s)|" + MyTools.numCores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
         socList.add("Freqs|" + MyTools.getCpuCoresFreqs(MyTools.androidDevice) );
         if ( socResult != "" ) {
             socList.add("GPU|" + "guessed: " + gpuResult);
