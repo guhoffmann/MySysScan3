@@ -1,3 +1,27 @@
+/*
+ * MainActivity.java
+ * 
+ ********************* Main file of the app MySysScan3 *************************
+ * 
+ * Copyright 2018 GU Hoffmann
+ * 
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ * 
+ */
+ 
 package com.uweandapp.MySysScan3;
 
 import MyTools.*;
@@ -41,7 +65,8 @@ public class MainActivity extends Activity {
     long freeExternalStorage;
     int periodicTime  = 2000; // ~2s time difference between two measurements!
     int firstPeriodic = 0; // has the periodic routine been running for at least one time?
-    int runRefresh = 0;
+    int runRefresh    = 0;
+    int runPeriodical = 0;
 
     private com.uweandapp.MySysScan3.MyExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
@@ -98,8 +123,7 @@ public class MainActivity extends Activity {
             storageResultList.clear();
             
             this.dialog.setTitle("Reading System data...");
-            //this.dialog.setMessage("Preparing\n░░░░░░░░░░░░░░░░░░░░");
-            this.dialog.setMessage("Preparing\n◼◼◼◼◼◼◼◼◼◼");
+            this.dialog.setMessage("Preparing\n◻◻◻◻◻◻◻◻◻◻");
             this.dialog.show();
         } // of onPreExecute()
 
@@ -109,7 +133,7 @@ public class MainActivity extends Activity {
 
             //-------------- everything that must be done to refresh fluent data -------------------
 
-            dialogMessage = "Getting OS data\n◻◼◼◼◼◼◼◼◼◼";
+            dialogMessage = "Getting OS data\n◼◻◻◻◻◻◻◻◻◻";
             publishProgress(10);
 
             // get device informations
@@ -127,7 +151,7 @@ public class MainActivity extends Activity {
                 deviceList.add("Host-IP|" + MyTools.getIp());
             //}
 
-            dialogMessage = "Getting storage information\n◻◻◼◼◼◼◼◼◼◼";
+            dialogMessage = "Getting storage information\n◼◼◻◻◻◻◻◻◻◻";
             publishProgress(20);
             
             // get storage informations
@@ -183,30 +207,30 @@ public class MainActivity extends Activity {
             }
 
 
-            dialogMessage = "Getting RAM information\n◻◻◻◻◼◼◼◼◼◼";
+            dialogMessage = "Getting RAM information\n◼◼◼◼◻◻◻◻◻◻";
             publishProgress(30);
             
             ramResultList.add("Total|" + MyTools.getRam2(0) + "B on device" );
             ramResultList.add("Used|" + MyTools.getRam2(2) + "B" );
             ramResultList.add("Free|" + MyTools.getRam2(1) + "B");
             
-            dialogMessage = "Primes benchmark\n◻◻◻◻◻◼◼◼◼◼";
+            dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
             MyTools.getPrimBench(500);
-            dialogMessage = "Primes benchmark\n◻◻◻◻◻◻◻◼◼◼";
+            dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
             
-            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◼◼";
+            dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
             publishProgress(60);
             MyTools.getSquareBench(500);
-            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◻◼";
+            dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◻";
             publishProgress(70);
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
 
             //-------------------- everything is done to refresh fluent data -----------------------
 
-            dialogMessage = "Fourier benchmark\n◻◻◻◻◻◻◻◻◻◻";
+            dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◼";
 
             return null;
 
@@ -269,6 +293,8 @@ public class MainActivity extends Activity {
             // try to access the List Adapter at the same time!!!
             
             if ( runRefresh == 0 ) {
+				
+				runPeriodical = 1; // mark periodical as running!
                 ramResultList.set(1,"Used|" + MyTools.getRam2(2) + "B" );
                 ramResultList.set(2,"Free|" + MyTools.getRam2(1) + "B");
                 listDataChild.put( listDataHeader.get(2), ramResultList );
@@ -284,6 +310,8 @@ public class MainActivity extends Activity {
                 listAdapter.notifyDataSetChanged();
                 // repeat code every periodicTime milliseconds
                 periodicHandler.postDelayed(this, periodicTime);
+                
+                runPeriodical = 0; // mark periodical as finished!
             }
         }
             
@@ -314,9 +342,13 @@ public class MainActivity extends Activity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
-                new readNewValuesClass(this).execute();
-                // important to update the view after the list ist updated!
-                listAdapter.notifyDataSetChanged();
+				// only run this if periodical isn't running
+				// to avoid crash and conflicts accessing list adapter!!!
+				if (runPeriodical == 0) { // only run this if periodical isn't running!
+					new readNewValuesClass(this).execute();
+					// important to update the view after the list ist updated!
+					listAdapter.notifyDataSetChanged();
+				}
                 return true;
             case R.id.action_info:
                showInfo(getString(R.string.main_app) +"\n"
