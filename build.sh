@@ -1,14 +1,14 @@
 #!/bin/bash
 
-################## bui1ld.sh (C) GU Hoffmann 05.06.2018 ###################
+################## build.sh (C) GU Hoffmann 05.06.2018 ###################
 #
 # Update the basic Android App with commandline tools on a X86-PC,
 # Raspberry Pi or an Android device running TERMUX!
-#                          2COMPLETE-VERSION
+#                          COMPLETE-VERSION
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.06.24"
+SCRIPTNAME="buildapp 18.06.26"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"

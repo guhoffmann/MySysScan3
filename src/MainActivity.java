@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ExpandableListView;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +39,9 @@ public class MainActivity extends Activity {
     long androidDataStorageUsed;
     long totalExternalStorage;
     long freeExternalStorage;
-    int periodicTime = 2000; // ~2s time difference between two measurements!
-    int firstPeriodic = 0;
+    int periodicTime  = 2000; // ~2s time difference between two measurements!
+    int firstPeriodic = 0; // has the periodic routine been running for at least one time?
+    int runRefresh = 0;
 
     private com.uweandapp.MySysScan3.MyExpandableListAdapter listAdapter;
     private ExpandableListView expListView;
@@ -87,6 +89,8 @@ public class MainActivity extends Activity {
         // do this with the UI BEFORE processing async task!
         @Override
         protected void onPreExecute() {
+            
+            runRefresh = 1;
             
             ramResultList.clear();
             deviceList.clear();
@@ -240,10 +244,14 @@ public class MainActivity extends Activity {
             // periodic handler must be called AFTER initialisation
             // of all list fields it should later work with!!!
             // So it's invoked here for the first time.
-            if (firstPeriodic == 0) {
+            /*if (firstPeriodic == 0) {
                 periodicHandler.post(periodicalCode);
                 firstPeriodic = 1;
-            }
+             }*/
+            
+            runRefresh = 0; // Set the run marker to "finished"
+            periodicHandler.post(periodicalCode);
+            
         } // of onPostExecute(Void p)
 
     } // of readNewValuesClass ---------------------------------------------------------------------
@@ -255,23 +263,30 @@ public class MainActivity extends Activity {
     private Runnable periodicalCode = new Runnable() {
         @Override
         public void run() {
+            
+            // Only run this if there's no Refresh-Class running!
+            // Necessary to avoid conflicts and crash if both classes
+            // try to access the List Adapter at the same time!!!
+            
+            if ( runRefresh == 0 ) {
+                ramResultList.set(1,"Used|" + MyTools.getRam2(2) + "B" );
+                ramResultList.set(2,"Free|" + MyTools.getRam2(1) + "B");
+                listDataChild.put( listDataHeader.get(2), ramResultList );
 
-          ramResultList.set(1,"Used|" + MyTools.getRam2(2) + "B" );
-          ramResultList.set(2,"Free|" + MyTools.getRam2(1) + "B");
-          listDataChild.put( listDataHeader.get(2), ramResultList );
+                String freqString = "Freqs|";
 
-          String freqString = "Freqs|";
-          
-         for (int i = 0;i< MyTools.numCores;i++) {
-            freqString = freqString +" "+MyTools.fastRead("/sys/devices/system/cpu/cpu" + i +"/cpufreq/scaling_cur_freq");
-          }
-          socList.set(4,freqString);
-          listDataChild.put( listDataHeader.get(1), socList);
-          
-          listAdapter.notifyDataSetChanged();
-          // repeat code every periodicTime milliseconds
-          periodicHandler.postDelayed(this, periodicTime);
+                for (int i = 0;i< MyTools.numCores;i++) {
+                freqString = freqString +" "+MyTools.fastRead("/sys/devices/system/cpu/cpu" + i +"/cpufreq/scaling_cur_freq");
+                }
+                socList.set(4,freqString);
+                listDataChild.put( listDataHeader.get(1), socList);
+
+                listAdapter.notifyDataSetChanged();
+                // repeat code every periodicTime milliseconds
+                periodicHandler.postDelayed(this, periodicTime);
+            }
         }
+            
     }; // of periodicalCode ------------------------------------------------------------------------
     
     //============================== START / INITIALIZE THE APP ====================================
