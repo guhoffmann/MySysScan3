@@ -157,7 +157,7 @@ do
       $APPNAME-New)
          bash -c "$CLEANFUNC"
          break;;
-         
+                  
       $APPNAME-New_with_test_on_device)
          bash -c "$CLEANFUNC"
          break;;
