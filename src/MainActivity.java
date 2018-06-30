@@ -214,16 +214,20 @@ public class MainActivity extends Activity {
             ramResultList.add("Used|" + MyTools.getRam2(2) + "B" );
             ramResultList.add("Free|" + MyTools.getRam2(1) + "B");
             
-            /*dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
+            // precalc benchmark to get more reliable results
+            dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
-            MyTools.getPrimBench(500);*/
+            MyTools.getPrimBench(500);
+            // primes benchmark
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
             
-            /*dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
+            // precalc benchmark to get more reliable results
+            dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
             publishProgress(60);
-            MyTools.getSquareBench(500);*/
+            MyTools.getSquareBench(500);
+            // fourier benchmark
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◻";
             publishProgress(70);
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
