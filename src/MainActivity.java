@@ -214,16 +214,16 @@ public class MainActivity extends Activity {
             ramResultList.add("Used|" + MyTools.getRam2(2) + "B" );
             ramResultList.add("Free|" + MyTools.getRam2(1) + "B");
             
-            dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
+            /*dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
-            MyTools.getPrimBench(500);
+            MyTools.getPrimBench(500);*/
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
             
-            dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
+            /*dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
             publishProgress(60);
-            MyTools.getSquareBench(500);
+            MyTools.getSquareBench(500);*/
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◻";
             publishProgress(70);
             benchResultList.add("Fourier|" + MyTools.getSquareBench(2000));
@@ -231,7 +231,8 @@ public class MainActivity extends Activity {
             //-------------------- everything is done to refresh fluent data -----------------------
 
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◼";
-
+            publishProgress(100);
+            
             return null;
 
         } // of doInBackground(Integer... position)
