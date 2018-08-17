@@ -46,7 +46,6 @@ echo -e $BLUE"\nHostname: $HOSTNAME\n"$WHITE
 PLATFORM_SDK="android-23-6.0.jar"
 
 # Names of app,package and apk to create
-
 APPNAME="MySysScan3"
 APKNAME="MySysScan3"
 

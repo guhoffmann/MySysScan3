@@ -51,7 +51,8 @@ public class SystemCommandExecutor
      * commands.add("-c");
      * commands.add("5");
      * commands.add("www.google.com");
-     * SystemCommandExecutor commandExecutor = new SystemCommandExecutor(commands);
+     * SystemCommandExecutor commandExecutor = nefinally block does not complete normally
+w SystemCommandExecutor(commands);
      * commandExecutor.executeCommand();
      *
      * Note: I've removed the other constructor that was here to support executing
@@ -68,6 +69,7 @@ public class SystemCommandExecutor
         this.adminPassword = null;
     }
 
+    //public int executeCommand()
     public int executeCommand()
             throws IOException, InterruptedException
     {
@@ -118,10 +120,9 @@ public class SystemCommandExecutor
             // TODO deal with this here, or just throw it?
             throw e;
         }
-        finally
-        {
-            return exitValue;
-        }
+
+        return exitValue;
+
     }
 
     /**

@@ -36,12 +36,10 @@ import android.view.MenuItem;
 import android.view.MenuInflater;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ExpandableListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -217,7 +215,7 @@ public class MainActivity extends Activity {
             // precalc benchmark to get more reliable results
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
-            MyTools.getPrimBench(1000);
+            MyTools.getPrimBench(2000);
             // primes benchmark
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
@@ -226,7 +224,7 @@ public class MainActivity extends Activity {
             // precalc benchmark to get more reliable results
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
             publishProgress(60);
-            MyTools.getSquareBench(1000);
+            MyTools.getSquareBench(2000);
             // fourier benchmark
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◻";
             publishProgress(70);

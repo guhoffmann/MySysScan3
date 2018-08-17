@@ -136,6 +136,7 @@ public class MyTools {
             while ( (line = bf.readLine()) != null ){
                 retString = retString + line;
             }
+            bf.close();
         
         } catch (IOException e) {
             e.printStackTrace();
@@ -262,7 +263,6 @@ public class MyTools {
         String cmdLine;
         String[] inString;
         long value;
-        int helpInt;
         String retString = "";
 
         if (androidDevice.equals("real") ) { // get system frequency infos for real device
@@ -335,8 +335,6 @@ public class MyTools {
 
     public static String getRam2(int choice) {
 
-        String cmdLine;
-        String[] inString;
         long value;
 
         switch(choice){
