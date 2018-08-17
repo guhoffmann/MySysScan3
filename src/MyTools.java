@@ -716,7 +716,8 @@ public class MyTools {
 
     } // of public static String getSquareBench(long timeLength)
 
-    /** parse JSON file in assets of myContext and return a JSONObject *****************************
+    /** parse JSON file in assets of application context 'myContext' *******************************
+     *  and return a JSONObject
      *
      */
 

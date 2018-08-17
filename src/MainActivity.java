@@ -217,7 +217,7 @@ public class MainActivity extends Activity {
             // precalc benchmark to get more reliable results
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
-            MyTools.getPrimBench(500);
+            MyTools.getPrimBench(1000);
             // primes benchmark
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
@@ -226,7 +226,7 @@ public class MainActivity extends Activity {
             // precalc benchmark to get more reliable results
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◻◻";
             publishProgress(60);
-            MyTools.getSquareBench(500);
+            MyTools.getSquareBench(1000);
             // fourier benchmark
             dialogMessage = "Fourier benchmark\n◼◼◼◼◼◼◼◼◼◻";
             publishProgress(70);
