@@ -215,10 +215,10 @@ public class MainActivity extends Activity {
             // precalc benchmark to get more reliable results
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◻◻◻◻◻";
             publishProgress(40);
-            MyTools.getPrimBench(2000);
             // primes benchmark
             dialogMessage = "Primes benchmark\n◼◼◼◼◼◼◼◻◻◻";
             publishProgress(50);
+            MyTools.getPrimBench(2000);
             benchResultList.add("Primes|" + MyTools.getPrimBench(2000));
             
             // precalc benchmark to get more reliable results
