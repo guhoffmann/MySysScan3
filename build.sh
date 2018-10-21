@@ -8,7 +8,7 @@
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.06.26"
+SCRIPTNAME="buildapp 18.10.21"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -76,14 +76,15 @@ case $HOSTNAME in
    senior-medion)
       SDK=/home/uwe/sparSDK/$PLATFORM_SDK
       # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
-      BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/26.0.1/
+      BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/28.0.2/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
       # Deklaration of build-tools 
       AAPT=$BUILDTOOLSPATH""aapt
       APKSIGNER=jarsigner
       ZIPALIGN=$BUILDTOOLSPATH""zipalign
       DX=dalvik-exchange
-      JAVAC="ecj -source 1.7 -target 1.7 "
+      #JAVAC="ecj -source 1.7 -target 1.7 "
+	  JAVAC="javac -source 1.7 -target 1.7 "
       ;;
 
    gamepi)
@@ -125,7 +126,7 @@ esac
 
 CLEANFUNC="
            rm $PROJECTDIR/output/*.*; \
-           rm -r $PROJECTDIR/obj/*.*; \
+           rm -r $PROJECTDIR/obj/*; \
            rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
            find -L $PROJECTDIR -name \"classes.dex\" -delete \
            "
@@ -190,7 +191,8 @@ clear
 ####### Specify compiler options to get only useful messages #############
 ##########################################################################
 
-COPTIONS="-warn:-allDeprecation"
+#COPTIONS="-warn:-allDeprecation"
+COPTIONS=" "
 
 ##########################################################################
 ###################### Compile and create app ############################
@@ -325,7 +327,7 @@ case $ITEM in
 		PID=$(adb jdwp)
 		echo -e "App Process-ID: $PID"
 		#adb logcat > logcat.txt
-      adb logcat|grep $PID
+        adb logcat
       break;;
       
    "$APPNAME-Run-without-compile")

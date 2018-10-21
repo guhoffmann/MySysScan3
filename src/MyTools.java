@@ -11,6 +11,7 @@ import android.hardware.Camera.*;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.BufferedReader;
@@ -20,7 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import android.hardware.camera2.*;
-import android.util.Log;
 import android.util.DisplayMetrics;
 import android.view.Display;
 
@@ -34,7 +34,7 @@ import static android.hardware.Camera.getCameraInfo;
 public class MyTools {
 
     static int myToolsKilo = 1000; // multiplier for K,M,G
-    public static String androidDevice; // "real"=real device, "emulator"=emulator, "virtualbox"
+    public static String androidDevice="real"; // "real"=real device, "emulator"=emulator, "virtualbox"
     private static HashMap<String, Integer> cpuCores;
     public static int numCores;
     private static ActivityManager.MemoryInfo memoryInfo;
@@ -81,7 +81,7 @@ public class MyTools {
             StringBuilder stdout = commandExecutor.getStandardOutputFromCommand();
             StringBuilder stderr = commandExecutor.getStandardErrorFromCommand();
             result = stdout.toString();
-            Log.d("RESULT:",cmdline + " > " + result + " " + stderr.toString());
+            Log.d("Line 84: R E S U L T  ! ! !",cmdline + " > " + result + " " + stderr.toString());
             if ( result.length()<2 ) {
                 return "null";
             } else return result.substring(0,result.length()-1); // cut last char off!(CR)
@@ -221,6 +221,7 @@ public class MyTools {
         String retString = "";
 
         cpuCores = new HashMap<String, Integer>();
+		Log.d("+++++++++++++ getCpuCores: device "+androidDevice+" ***"," before Test ++++++++++");
 
         if (androidDevice.equals("real") ) { // get system frequency infos for real device
 
@@ -238,17 +239,20 @@ public class MyTools {
                 }
             }// of for (int i = 0;i< Integer.parseInt(...
 
-        } else { //get system frequency infos for android emulator
+        }  else { //get system frequency infos for android emulator
 
             cmdLine = getPipedCmdLine("cat /proc/cpuinfo|grep -w 'cpu MHz'");
             inString = cmdLine.trim().split(":");
             value = Math.round(Float.parseFloat(inString[1])*1000.0*1000.0);
             cpuCores.put(calcAmount(value),1);
+			//cpuCores.put("Test G");
         }
 
         for (HashMap.Entry<String, Integer> entry : cpuCores.entrySet()) {
             retString = retString + entry.getValue() + "@" + entry.getKey() + "Hz ";
         }
+		Log.d("---------- getCpuCores: device "+androidDevice+" ***"," after Test ----------");
+
         return retString;
 
     } // of getCpuCores()
@@ -264,7 +268,7 @@ public class MyTools {
         String[] inString;
         long value;
         String retString = "";
-
+		Log.d("+++++++++++++ getCpuCoresFreqs: device "+androidDevice+" ***"," before Test ++++++++++");
         if (androidDevice.equals("real") ) { // get system frequency infos for real device
 
             // Search for Cores and frequencies in system directories
@@ -282,6 +286,7 @@ public class MyTools {
             value = Math.round(Float.parseFloat(inString[1])*1000.0*1000.0);
             cpuCores.put(calcAmount(value),1);
         }
+		Log.d("---------- getCpuCoresFreqs: device "+androidDevice+" ***"," after Test ----------");
 
         return retString;
 
@@ -480,9 +485,10 @@ public class MyTools {
 
     public static long getTotalInternalStorage() {
         String cmdLine;
-
+/*
          if (androidDevice == "real") {
-            cmdLine = MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk0"); //for Android
+			// this one crashes on Oreo due to lacking permissions!!!!!
+            //cmdLine = MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk0"); //for Android
          } else if (androidDevice == "emulator") {
                 cmdLine = MyTools.getPipedCmdLine("cat /proc/partitions|grep -w vda"); //for android emulator
          } else {
@@ -492,6 +498,8 @@ public class MyTools {
         String[] inString = cmdLine.trim().split("\\s+");
 
         return Long.parseLong(inString[2]) * 1024;
+*/
+		return getInternalStorage(0);
 
     } // of getTotalInternalStorage()
 
@@ -504,13 +512,20 @@ public class MyTools {
         String cmdLine;
         String[] inString;
         long value;
-
+/*
         // get /dev/block whole internal storage
         cmdLine = MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk0");
         inString = cmdLine.trim().split("\\s+");
         value = Long.parseLong(inString[2]) * 1024;
         
         return value - getInternalStorage(1);
+*/
+		cmdLine = MyTools.getPipedCmdLine("df |grep /system");
+        inString = cmdLine.trim().split("\\s+");
+        value = Long.parseLong(inString[2]) * 1024;
+		return value - getInternalStorage(1);
+
+ 
 
     } // of getAndroidSystemStorage()
 

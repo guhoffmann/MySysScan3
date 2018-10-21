@@ -37,6 +37,7 @@ import android.view.MenuInflater;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.ExpandableListView;
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -271,13 +272,13 @@ public class MainActivity extends Activity {
             // periodic handler must be called AFTER initialisation
             // of all list fields it should later work with!!!
             // So it's invoked here for the first time.
-            /*if (firstPeriodic == 0) {
+            if (firstPeriodic == 0) {
                 periodicHandler.post(periodicalCode);
                 firstPeriodic = 1;
-             }*/
+             }
             
             runRefresh = 0; // Set the run marker to "finished"
-            periodicHandler.post(periodicalCode);
+            ////periodicHandler.post(periodicalCode);
             
         } // of onPostExecute(Void p)
 
@@ -330,8 +331,8 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+       Log.d("O N C R E A T E O P T I O N S   ! ! !","Building menu");
        super.onCreateOptionsMenu(menu);
-       
        MenuInflater inflater = getMenuInflater();
        inflater.inflate(R.menu.menu_options, menu);
         return true;
@@ -365,16 +366,22 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+       Log.d("O N C R E A T E   ! ! !:","Entering onCreate..."); 
         super.onCreate(savedInstanceState);
-        
+		Log.d("O N C R E A T E   ! ! !:","After super call!"); 
         // First init tools library
         MyTools.init(this);
+		Log.d("O N C R E A T E   ! ! !:","After tools init!"); 
 
         // get JSON-Object containing the SOC infos
         socObject = MyTools.parseJSONData(this, "soc.json");
 
-        // determine if we got an emulator or real device!
+        /* ******************************************************
 
+			 determine if we got an emulator or real device!
+
+		*********************************************************/
+/*
         if ( Integer.parseInt(MyTools.getPipedCmdLine("cat /proc/partitions|grep -wc mmcblk0")) == 1 ) {
             MyTools.androidDevice = "real";
             sysInternalStorage = MyTools.getAndroidSystemStorage();
@@ -385,6 +392,8 @@ public class MainActivity extends Activity {
             MyTools.androidDevice = "emulator";
             sysInternalStorage = 0;
         }
+*/
+		 sysInternalStorage = MyTools.getAndroidSystemStorage();
 
         // set the View as defined in actvity_main.xml
         setContentView(R.layout.activity_main);
@@ -480,7 +489,9 @@ public class MainActivity extends Activity {
         }
         socList.add("Board|"  + android.os.Build.HARDWARE.trim() + " " + Build.BOARD.trim());
         socList.add("CPU|" + MyTools.getCpu().trim());
-        socList.add("Core(s)|" + MyTools.numCores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
+    
+    socList.add("Core(s)|" + MyTools.numCores + ": " + MyTools.getCpuCores(MyTools.androidDevice) );
+		Log.d("M a i n A c t i v i t y , Line 487:******** ", " prepareListData before getCpuCoresFreqs !********" );
         socList.add("Freqs|" + MyTools.getCpuCoresFreqs(MyTools.androidDevice) );
         if ( socResult != "" ) {
             socList.add("GPU|" + "guessed: " + gpuResult);
@@ -509,7 +520,6 @@ public class MainActivity extends Activity {
 
         listDataHeader.add(" Benchmarks");
         // values are put in readNewValuesClass() for being able to be updated on demand!
-
     } // of prepareListData()
 
     /** Display alert dialog with message **********************************************************
