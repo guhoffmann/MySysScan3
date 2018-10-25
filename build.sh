@@ -4,7 +4,7 @@
 #
 # Compile the Android App with linux commandline tools on any X86-PC,
 # Raspberry Pi or on an Android device running TERMUX!
-# Your only need to have installed:
+# You only need to have installed:
 #
 # - the android.jar of the desired Android platform (= PLATFORM_SDK)
 # - the build tools aapt, zipalign, apksigner
@@ -23,18 +23,18 @@ clear
 echo -e $GREEN"*** $SCRIPTNAME ***\n"$WHITE
 
 if [ $(uname -o) = "Android" ];then
-   HOSTNAME="Android"
-   # TERMUX: See if grep comes from busybox or GNU!
-   # For GNU grep set --color marking on
-   if [ -f $PREFIX/bin/grep ];then
-      GREP="$PREFIX/bin/grep --color"
-   else
-      GREP="grep"
-   fi
+	HOSTNAME="Android"
+	# TERMUX: See if grep comes from busybox or GNU!
+	# For GNU grep set --color marking on
+	if [ -f $PREFIX/bin/grep ];then
+		GREP="$PREFIX/bin/grep --color"
+	else
+		GREP="grep"
+	fi
 else
-   HOSTNAME=$(cat /etc/hostname)
-   # highlight some things with GNU grep!
-   GREP="grep --color"
+	HOSTNAME=$(cat /etc/hostname)
+	# highlight some things with GNU grep!
+	GREP="grep --color"
 fi
 
 echo -e $BLUE"\nHostname: $HOSTNAME\n"$WHITE
@@ -56,45 +56,46 @@ APKNAME="MySysScan3"
 PACKAGEPATH="com/uweandapp"
 PACKAGENAME="com.uweandapp"
 
-# Get locations of project files and sparSDK with android.jar files!
+# Get locations of project files and sparSDK with android.jar files
+# from SDK 19(4.4 KitKat) and SDK 23(6.0 Marshmallow) only!
 # Build-Tools in sparSDK are 26.0.1 for now on PC/Notebook!
 # These are used for X86/AMD64 PC's only.
 # On Android devices/Pi we use the google tools ARM/TERMUX!
 
 case $HOSTNAME in
 
-   B590)
-      SDK=/home/uwe/sparSDK/$PLATFORM_SDK
-      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-      JAVAC="ecj -source 1.7 -target 1.7 "
-      ;;
- 
-   uwe-nc10)
-      SDK=/home/uwe/Android/SDK/sparSDK/$PLATFORM_SDK
-      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-      JAVAC="ecj -source 1.7 -target 1.7 "
-      ;;
-      
-   senior-medion)
-      SDK=/home/uwe/sparSDK/$PLATFORM_SDK
-      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-      JAVAC="ecj -source 1.7 -target 1.7 "
-      ;;
+	B590)
+		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
 
-   gamepi)
-      SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM_SDK
-      PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
-      JAVAC="ecj -source 1.7 -target 1.7 "
-      ;;
+	uwe-nc10)
+		SDK=/home/uwe/Android/SDK/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
 
-   Android)
-      SDK=~/storage/shared/sparSDK/$PLATFORM_SDK
-      PROJECTDIR=~/MyDevelop/MyAndroid/$APPNAME
-      JAVAC="ecj -source 1.7 -target 1.7 "
-      ;;
-      
-   *)
-      exit;;
+	senior-medion)
+		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
+
+	gamepi)
+		SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
+
+	Android)
+		SDK=~/storage/shared/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=~/storage/downloads/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
+
+	*)
+		exit;;
 esac
 
 ##########################################################################
@@ -105,11 +106,11 @@ esac
 # Clean project
 
 CLEANFUNC="
-           rm $PROJECTDIR/output/*.*; \
-           rm -r $PROJECTDIR/obj/*; \
-           rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
-           find -L $PROJECTDIR -name \"classes.dex\" -delete \
-           "
+	rm $PROJECTDIR/output/*.*; \
+	rm -r $PROJECTDIR/obj/*; \
+	rm $PROJECTDIR/src/$PACKAGEPATH/$APPNAME/R.java; \
+	find -L $PROJECTDIR -name \"classes.dex\" -delete \
+"
 
 # Now go on and select what to do...
 
@@ -208,6 +209,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # Make a dex file
 
    echo -e $GREEN"\n=> Making Dex..."$WHITE
+ 
    if [ $HOSTNAME != "Android" ];then
  		dalvik-exchange --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
    else
