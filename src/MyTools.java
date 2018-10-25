@@ -433,10 +433,10 @@ public class MyTools {
 
         long value;
 
-        if ( (MyTools.getPipedCmdLine("df|grep sdcard").equals("null") )
+       /* if ( (MyTools.getPipedCmdLine("df|grep sdcard").equals("null") )
             && ( MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk1").equals("null") )){
             value = 0;
-        } else {
+        } else {*/
 
             StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
             if (Build.VERSION.SDK_INT > 20) {
@@ -472,7 +472,7 @@ public class MyTools {
                 } // of switch+ "\n Available: " +  MyTools.calcAmount(availableInternalStorage)
             } // if (Build.VERSION.SDK_INT > 20)... else...
 
-        }
+        //}
 
         return value;
 

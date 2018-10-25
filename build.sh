@@ -2,13 +2,17 @@
 
 ################## build.sh (C) GU Hoffmann 05.06.2018 ###################
 #
-# Update the basic Android App with commandline tools on a X86-PC,
-# Raspberry Pi or an Android device running TERMUX!
-#                          COMPLETE-VERSION
+# Compile the Android App with linux commandline tools on any X86-PC,
+# Raspberry Pi or on an Android device running TERMUX!
+# Your only need to have installed:
+#
+# - the android.jar of the desired Android platform (= PLATFORM_SDK)
+# - the build tools aapt, zipalign, apksigner
+# - jarsigner on non Android machines
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.10.21"
+SCRIPTNAME="buildapp 18.10.25"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -52,8 +56,7 @@ APKNAME="MySysScan3"
 PACKAGEPATH="com/uweandapp"
 PACKAGENAME="com.uweandapp"
 
-# Get locations of project files and sparSDK with android.jar files
-# from SDK 19(4.4 KitKat) and SDK 23(6.0 Marshmallow) only!
+# Get locations of project files and sparSDK with android.jar files!
 # Build-Tools in sparSDK are 26.0.1 for now on PC/Notebook!
 # These are used for X86/AMD64 PC's only.
 # On Android devices/Pi we use the google tools ARM/TERMUX!
@@ -62,54 +65,31 @@ case $HOSTNAME in
 
    B590)
       SDK=/home/uwe/sparSDK/$PLATFORM_SDK
-      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
-      BUILDTOOLSPATH=/media/uwe/backup/data/Android/Sdk/build-tools/26.0.1/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-      # Deklaration of build-tools 
-      AAPT=$BUILDTOOLSPATH""aapt
-      APKSIGNER=jarsigner
-      ZIPALIGN=$BUILDTOOLSPATH""zipalign
-      DX=dalvik-exchange
+      JAVAC="ecj -source 1.7 -target 1.7 "
+      ;;
+ 
+   uwe-nc10)
+      SDK=/home/uwe/Android/SDK/sparSDK/$PLATFORM_SDK
+      PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
       JAVAC="ecj -source 1.7 -target 1.7 "
       ;;
       
    senior-medion)
       SDK=/home/uwe/sparSDK/$PLATFORM_SDK
-      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
-      BUILDTOOLSPATH=/home/uwe/Android/Sdk/build-tools/28.0.2/
       PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-      # Deklaration of build-tools 
-      AAPT=$BUILDTOOLSPATH""aapt
-      APKSIGNER=jarsigner
-      ZIPALIGN=$BUILDTOOLSPATH""zipalign
-      DX=dalvik-exchange
-      #JAVAC="ecj -source 1.7 -target 1.7 "
-	  JAVAC="javac -source 1.7 -target 1.7 "
+      JAVAC="ecj -source 1.7 -target 1.7 "
       ;;
 
    gamepi)
       SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM_SDK
-      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
-      BUILDTOOLSPATH=""
       PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
-      # Deklaration of build-tools 
-      AAPT=$BUILDTOOLSPATH""aapt
-      APKSIGNER=jarsigner
-      ZIPALIGN=$BUILDTOOLSPATH""zipalign
-      DX=dalvik-exchange
       JAVAC="ecj -source 1.7 -target 1.7 "
       ;;
 
    Android)
-      SDK=~/uwe/sparSDK/$PLATFORM_SDK
-      # BUILDTOOLSPATH needs "/" at the end to get subsequent script working
-      BUILDTOOLSPATH=""
-      PROJECTDIR=~/uwe/$APPNAME
-      # Deklaration of build-tools 
-      AAPT=$BUILDTOOLSPATH""aapt
-      APKSIGNER=apksigner
-      ZIPALIGN=$BUILDTOOLSPATH""zipalign
-      DX=dx
+      SDK=~/storage/shared/sparSDK/$PLATFORM_SDK
+      PROJECTDIR=~/MyDevelop/MyAndroid/$APPNAME
       JAVAC="ecj -source 1.7 -target 1.7 "
       ;;
       
@@ -213,7 +193,7 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # for accessing ressources from Java source code
 
    echo -e $GREEN"\n=> Creating R.java..."$WHITE
-   $AAPT package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
+   aapt package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
          -S $PROJECTDIR/res -I $SDK
 
    # Compile Java files
@@ -228,27 +208,31 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    # Make a dex file
 
    echo -e $GREEN"\n=> Making Dex..."$WHITE
-   $DX --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
+   if [ $HOSTNAME != "Android" ];then
+ 		dalvik-exchange --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
+   else
+		dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
+   fi
 
-   #If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because
-   # you use old build tools and DX try to translate java 1.7 rather than 1.8.
+   # If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because you use
+   # old build tools and dalvik-exchange tries to translate java 1.7 rather than 1.8.
    # To solve the problem, you have to specify 1.7 java version in the previous
-   #javac command:
-   #javac -d obj -source 1.7 -target 1.7 ...
+   # javac command:
+   # javac -d obj -source 1.7 -target 1.7 ...
 
    ############################## Put everything in an APK #########################################
 
    echo -e $GREEN"\n=> Making unsigned APK..."$WHITE
    
    # First add resources to unaligned apk
-   $AAPT package -f -m -F $PROJECTDIR/output/$APKNAME.unaligned.apk \
+   aapt package -f -m -F $PROJECTDIR/output/$APKNAME.unaligned.apk \
          -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
          -S $PROJECTDIR/res -I $SDK
           
    # Now add DEX file to unaligned apk - don't know why I couldn't accomplish
    # this at once with command above - subject for research...
    cd $PROJECTDIR/output
-   $AAPT add $PROJECTDIR/output/$APKNAME.unaligned.apk classes.dex
+   aapt add $PROJECTDIR/output/$APKNAME.unaligned.apk classes.dex
    cd $PROJECTDIR
    
    ###################################### SIGNING ##################################################
@@ -262,25 +246,28 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    if [ $HOSTNAME != "Android" ];then
 
       # Generate new key pair for debug, switch off if you have one to sign the app!
-      # Keystore password = key password = debug-test, alias = test1.
+      # Keystore password = key password = alias: debug-test
 
       echo -e "\n=> Generating keystore for signing..."
-      keytool -genkey -noprompt -storepass debug-test \
-              -keypass debug-test -alias test1 -dname "CN=uwe" \
+      keytool -genkey -noprompt \
+			  -alias debug-test \
+			  -dname "CN=uwe" \
+			  -storepass debug-test \
+			  -keypass debug-test \
               -validity 36500 -keystore $PROJECTDIR/$APPNAME.keystore \
               -keyalg RSA -keysize 2048
 
-      #$APKSIGNER sign --ks $PROJECTDIR/$APPNAME.keystore --ks-pass pass:debug-test \
-      #            $PROJECTDIR/output/$APKNAME.unaligned.apk
-      $APKSIGNER -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
-                 -storepass debug-test $PROJECTDIR/output/$APKNAME.unaligned.apk test1
+	  # Dunno why apksigner doesn't work, must use jarsigner instead!
+	  # APK signed with apksigner doesn't install, must work on this.
+	  jarsigner -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
+				-storepass debug-test $PROJECTDIR/output/$APKNAME.unaligned.apk debug-test
 
       # Align the APK (only works after signing)
-
-      $ZIPALIGN -f 4 $PROJECTDIR/output/$APKNAME.unaligned.apk \
+      zipalign -f 4 $PROJECTDIR/output/$APKNAME.unaligned.apk \
              $PROJECTDIR/output/$APKNAME.apk
-   else
-      $APKSIGNER -p debug-test $PROJECTDIR/$APPNAME.keystore \
+
+   else  # $HOSTNAME = "Android"
+	  apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
       $PROJECTDIR/output/$APKNAME.unaligned.apk \
       $PROJECTDIR/output/$APKNAME.apk
       
