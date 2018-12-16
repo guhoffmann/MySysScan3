@@ -6,13 +6,13 @@
 # Raspberry Pi or on an Android device running TERMUX!
 # You only need to have installed:
 #
-# - the android.jar of the desired Android platform (= PLATFORM_SDK)
-# - the build tools aapt, zipalign, apksigner
-# - jarsigner on non Android machines
+# - 'android.jar' of the desired Android platform (= PLATFORM_SDK)
+# - build tools: 'aapt', 'apksigner'
+# - java compiler 'javac' ('ecj' for Android platforms)
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.10.25"
+SCRIPTNAME="buildapp 18.12.16"
 
 WHITE="\033[0;37m"
 GREEN="\033[1;32m"
@@ -64,14 +64,14 @@ PACKAGENAME="com.uweandapp"
 
 case $HOSTNAME in
 
-	B590)
-		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
+	uwe-B590)
+		SDK=/home/uwe/Android/sparSDK/$PLATFORM_SDK
 		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
 		JAVAC="ecj -source 1.7 -target 1.7 "
 		;;
 
 	uwe-nc10)
-		SDK=/home/uwe/Android/SDK/sparSDK/$PLATFORM_SDK
+		SDK=/home/uwe/android/sparSDK/$PLATFORM_SDK
 		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
 		JAVAC="ecj -source 1.7 -target 1.7 "
 		;;
@@ -90,7 +90,7 @@ case $HOSTNAME in
 
 	Android)
 		SDK=~/storage/shared/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=~/storage/downloads/MyDevelop/MyAndroid/$APPNAME
+		PROJECTDIR=~/MyDevelop/MyAndroid/MySysScan3/$APPNAME
 		JAVAC="ecj -source 1.7 -target 1.7 "
 		;;
 
@@ -227,14 +227,14 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
    echo -e $GREEN"\n=> Making unsigned APK..."$WHITE
    
    # First add resources to unaligned apk
-   aapt package -f -m -F $PROJECTDIR/output/$APKNAME.unaligned.apk \
+   aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
          -A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
          -S $PROJECTDIR/res -I $SDK
           
    # Now add DEX file to unaligned apk - don't know why I couldn't accomplish
    # this at once with command above - subject for research...
    cd $PROJECTDIR/output
-   aapt add $PROJECTDIR/output/$APKNAME.unaligned.apk classes.dex
+   aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
    cd $PROJECTDIR
    
    ###################################### SIGNING ##################################################
@@ -259,15 +259,10 @@ if [ $ITEM != "$APPNAME-Run-without-compile" ]\
               -validity 36500 -keystore $PROJECTDIR/$APPNAME.keystore \
               -keyalg RSA -keysize 2048
 
-	  # Dunno why apksigner doesn't work, must use jarsigner instead!
-	  # APK signed with apksigner doesn't install, must work on this.
-	  jarsigner -verbose -keystore $PROJECTDIR/$APPNAME.keystore \
-				-storepass debug-test $PROJECTDIR/output/$APKNAME.unaligned.apk debug-test
-
-      # Align the APK (only works after signing)
-      zipalign -f 4 $PROJECTDIR/output/$APKNAME.unaligned.apk \
-             $PROJECTDIR/output/$APKNAME.apk
-
+	  # apksigner for Linux and Android differ in their parameters!
+	  apksigner sign --ks-pass pass:debug-test --ks $PROJECTDIR/$APPNAME.keystore \
+      $PROJECTDIR/output/$APKNAME.apk \
+   
    else  # $HOSTNAME = "Android"
 	  apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
       $PROJECTDIR/output/$APKNAME.unaligned.apk \
