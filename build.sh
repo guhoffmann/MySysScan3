@@ -12,7 +12,7 @@
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 18.12.17"
+SCRIPTNAME="buildapp 19.04.06"
 
 clear
 
@@ -38,7 +38,7 @@ fi
 # Select SDK 23 = Android 6.0
 # Necessary for using Camera2-Api!!!
 
-PLATFORM_SDK="android-23-6.0.jar"
+PLATFORM_SDK="android.jar"
 
 # Names of app,package and apk to create
 APPNAME="MySysScan3"
@@ -70,6 +70,13 @@ case $HOSTNAME in
 	senior-medion)
 		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
 		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+		JAVAC="ecj -source 1.7 -target 1.7 "
+		;;
+
+	uwe-dell)
+		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
+		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
+		BUILDTOOLSP=/home/uwe/sparSDK/build-tools
 		JAVAC="ecj -source 1.7 -target 1.7 "
 		;;
 
@@ -188,7 +195,7 @@ while [ "$key" != "q" ]; do
 		# for accessing ressources from Java source code
 		echo
 		echo "=> Creating R.java..."
-		aapt package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
+		$BUILDTOOLSP/aapt package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
 				-S $PROJECTDIR/res -I $SDK
 
 		# Compile Java files
@@ -205,7 +212,7 @@ while [ "$key" != "q" ]; do
 		echo "=> Making Dex..."
 	 
 		if [ $HOSTNAME != "Android" ];then
-			dalvik-exchange --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
+			$BUILDTOOLSP/dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 		else
 			dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 		fi
@@ -222,14 +229,14 @@ while [ "$key" != "q" ]; do
 		echo "=> Making unsigned APK..."
 		
 		# First add resources to unaligned apk
-		aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
+		$BUILDTOOLSP/aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
 				-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
 				-S $PROJECTDIR/res -I $SDK
 				 
 		# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
 		# this at once with command above - subject for research...
 		cd $PROJECTDIR/output
-		aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
+		$BUILDTOOLSP/aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
 		cd $PROJECTDIR
 		
 		###################################### SIGNING ##################################################
@@ -257,11 +264,11 @@ while [ "$key" != "q" ]; do
 					  -keyalg RSA -keysize 2048
 
 		  # apksigner for Linux and Android differ in their parameters!
-		  apksigner sign --ks-pass pass:debug-test --ks $PROJECTDIR/$APPNAME.keystore \
+		  $BUILDTOOLSP/apksigner sign --ks-pass pass:debug-test --ks $PROJECTDIR/$APPNAME.keystore \
 			$PROJECTDIR/output/$APKNAME.apk \
 		
 		else  # $HOSTNAME = "Android"
-		  apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
+		   $BUILDTOOLSP/apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
 			$PROJECTDIR/output/$APKNAME.unaligned.apk \
 			$PROJECTDIR/output/$APKNAME.apk
 			
