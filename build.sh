@@ -74,9 +74,9 @@ case $HOSTNAME in
 		;;
 
 	uwe-dell)
-		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
+		SDK=/home/uwe/Android/Sdk/platforms/android-23/$PLATFORM_SDK
 		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-		BUILDTOOLSP=/home/uwe/sparSDK/build-tools
+		BUILDTOOLSP=/home/uwe/Android/Sdk/build-tools/28.0.3
 		JAVAC="ecj -source 1.7 -target 1.7 "
 		;;
 

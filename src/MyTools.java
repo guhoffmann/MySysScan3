@@ -48,7 +48,7 @@ public class MyTools {
             "Gingerbead", "Gingerbead M.R.1", "Honeycomb", "Honeycomb M.R.1", "Honeycomb M.R.2",
             "Ice Cream Sandwich", "Ice Cream Sandwich M.R.1", "Jellybean", "Jellybean M.R.1", "Jellybean M.R.2",
             "Kitkat", "Kitkat Wear", "Lollipop", "Lollipop M.R.1",
-            "Marshmallow", "Nougat", "Nougat M.R.1", "Oreo", "Oreo M.R.1","","",""};
+            "Marshmallow", "Nougat", "Nougat M.R.1", "Oreo", "Oreo M.R.1","Pie","Q",""};
  
      /** Call this from calling app to initialize some important values ****************************
      *
