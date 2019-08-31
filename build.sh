@@ -6,104 +6,18 @@
 # Raspberry Pi or on an Android device running TERMUX!
 # You only need to have installed:
 #
-# - 'android.jar' of the desired Android platform (= PLATFORM_SDK)
+# - 'android.jar' of the desired Android platform (=SDKDIR)
 # - build tools: 'aapt', 'apksigner'
 # - java compiler 'javac' ('ecj' for Android platforms)
 #
 ###########################################################################
 
-SCRIPTNAME="buildapp 19.04.06"
+SCRIPTNAME="build 19.08.31-2"
+. ./build.cfg # Include configurations
 
 clear
 
-if [ $(uname -o) = "Android" ];then
-	HOSTNAME="Android"
-	# TERMUX: See if grep comes from busybox or GNU!
-	# For GNU grep set --color marking on
-	if [ -f $PREFIX/bin/grep ];then
-		GREP="$PREFIX/bin/grep --color"
-	else
-		GREP="grep"
-	fi
-else
-	HOSTNAME=$(cat /etc/hostname)
-	# highlight some things with GNU grep!
-	GREP="grep --color"
-fi
-##########################################################################
-######################### Prerequisites ##################################
-#################### Determine paths and tools ###########################
-##########################################################################
-
-# Select SDK 23 = Android 6.0
-# Necessary for using Camera2-Api!!!
-
-PLATFORM_SDK="android.jar"
-
-# Names of app,package and apk to create
-APPNAME="MySysScan3"
-APKNAME="MySysScan3"
-
-PACKAGEPATH="com/uweandapp"
-PACKAGENAME="com.uweandapp"
-
-# Get locations of project files and sparSDK with android.jar files
-# from SDK 19(4.4 KitKat) and SDK 23(6.0 Marshmallow) only!
-# Build-Tools in sparSDK are 26.0.1 for now on PC/Notebook!
-# These are used for X86/AMD64 PC's only.
-# On Android devices/Pi we use the google tools ARM/TERMUX!
-
-case $HOSTNAME in
-
-	uwe-b590)
-		SDK=/home/uwe/Android/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	uwe-nc10)
-		SDK=/home/uwe/android/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	senior-medion)
-		SDK=/home/uwe/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	uwe-dell)
-		SDK=/home/uwe/Android/Sdk/platforms/android-23/$PLATFORM_SDK
-		PROJECTDIR=/home/uwe/MyDevelop/MyAndroid/$APPNAME
-		BUILDTOOLSP=/home/uwe/Android/Sdk/build-tools/28.0.3
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	gamepi)
-		SDK=/media/pi/kingston-8g-ext4/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=/media/pi/kingston-8g-ext4/MyDevelop/MyAndroid/$APPNAME
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	Android)
-		SDK=~/storage/shared/sparSDK/$PLATFORM_SDK
-		PROJECTDIR=~/MyDevelop/MyAndroid/MySysScan3/$APPNAME
-		JAVAC="ecj -source 1.7 -target 1.7 "
-		;;
-
-	*)
-		echo "No matching host for compilation found!"
-		exit;;
-esac
-
-##########################################################################
-######################### Prerequisites ##################################
-#########################  "Functions"  ##################################
-##########################################################################
-
-# Clean project
-
+# 'function' for cleaning project
 CLEANFUNC="
 	rm $PROJECTDIR/output/*.*; \
 	rm -r $PROJECTDIR/obj/*; \
@@ -113,8 +27,10 @@ CLEANFUNC="
 
 # Now go on and select what to do...
 
+# construct the menu according to system (Android or Linux system)
+HOSTNAME=$(cat /etc/hostname)
 if [ $HOSTNAME != "Android" ];then
-   MENU="$APPNAME-New|$APPNAME-New_with_test_on_device|$APPNAME-New_with_test_on_device_with_LogCat|$APPNAME-Run-without-compile|$APPNAME-Clean"
+   MENU="Build $APPNAME|Test $APPNAME on device|Build $APPNAME with test on device with LogCat|Run $APPNAME without build|Clean project dir $APPNAME"
 else
    MENU="$APPNAME-New \
          $APPNAME-Run-without-compile \
@@ -122,8 +38,12 @@ else
          Abbruch"
 fi
 
-key=""
+#==========================================================================
+# Display menu and wait for action to be selected with a keypress.
+# This is repeated until 'q' is pressed to quit the script!
+#==========================================================================
 
+key=""
 while [ "$key" != "q" ]; do
 
 	echo "*** $SCRIPTNAME ***"
@@ -138,50 +58,27 @@ while [ "$key" != "q" ]; do
 	# store selection in ITEM
 	ITEM=$(echo $key"|"$MENU|awk -F '|' '{ print $(1+$1)}')
 
+	# call clean 'function' if necessary
 	case $ITEM in
-	
-		$APPNAME-New)
-			echo "New?"
-			bash -c "$CLEANFUNC"
-			;;
 			
-		$APPNAME-New_with_test_on_device)
-			bash -c "$CLEANFUNC"
-			;;
-
-		$APPNAME-New_with_test_on_device_with_LogCat)
-			bash -c "$CLEANFUNC"
-			;;
-			
-		$APPNAME-Run-without-compile)
-			;;
-			
-		$APPNAME-Clean)
-			bash -c "$CLEANFUNC"
-			echo "Project cleaned!"
+		"q")
+			echo "Break!"
+			exit;;
+		"Run $APPNAME without build")
 			;;
 			
 		*)
-			echo "Break!"
-			exit;;
+			bash -c "$CLEANFUNC"
+			echo "Project cleaned!"
+			;;
 	esac
 
 	clear
 
-	##########################################################################
-	######################### Prerequisites ##################################
-	####### Specify compiler options to get only useful messages #############
-	##########################################################################
+	#--------------------- Compile and create app -------------------------
 
-	#COPTIONS="-warn:-allDeprecation"
-	COPTIONS=" "
-
-	##########################################################################
-	###################### Compile and create app ############################
-	##########################################################################
-
-	if [ $ITEM != "$APPNAME-Run-without-compile" ]\
-		&& [ $ITEM != "$APPNAME-Clean" ]; then
+	if [ "$ITEM" != "Run $APPNAME without build" ]\
+		&& [ "$ITEM" != "Clean project dir $APPNAME" ]; then
 
 		STARTZEIT=$(date +%s)
 		
@@ -195,14 +92,14 @@ while [ "$key" != "q" ]; do
 		# for accessing ressources from Java source code
 		echo
 		echo "=> Creating R.java..."
-		$BUILDTOOLSP/aapt package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
-				-S $PROJECTDIR/res -I $SDK
+		aapt package -f -m -J $PROJECTDIR/src -M $PROJECTDIR/AndroidManifest.xml \
+				-S $PROJECTDIR/res -I $SDKDIR
 
 		# Compile Java files
 		echo
 		echo "=> Compiling java..."
-		$JAVAC $COPTIONS -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDK \
-			  $PROJECTDIR/src/*.java 2>&1|$GREP -E '^|WARNING|ERROR'
+		$JAVAC -d $PROJECTDIR/obj -classpath $PROJECTDIR/src: -bootclasspath $SDKDIR \
+			  $PROJECTDIR/src/*.java 2>&1|grep -E '^|WARNING|ERROR'
 
 
 		COMPILEZEIT=$(date +%s)
@@ -212,38 +109,35 @@ while [ "$key" != "q" ]; do
 		echo "=> Making Dex..."
 	 
 		if [ $HOSTNAME != "Android" ];then
-			$BUILDTOOLSP/dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
+			"$BUILDTOOLSDIR"dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 		else
 			dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 		fi
 
-		# If you have the error UNEXPECTED TOP-LEVEL EXCEPTION, it can be because you use
-		# old build tools and dalvik-exchange tries to translate java 1.7 rather than 1.8.
-		# To solve the problem, you have to specify 1.7 java version in the previous
-		# javac command:
-		# javac -d obj -source 1.7 -target 1.7 ...
+		# If error UNEXPECTED TOP-LEVEL EXCEPTION occurs, the cause can be
+		# old build tools and dalvik-exchange trying to translate java 1.7
+		# rather than 1.8. To solve this problem, specify use of 1.7 java
+		# version in the previous javac command:
+		# 'javac -d obj -source 1.7 -target 1.7 ...'
 
-		############################## Put everything in an APK #########################################
-
+		#--------------------- Put everything in an APK -------------------
+		
 		echo
 		echo "=> Making unsigned APK..."
 		
 		# First add resources to unaligned apk
-		$BUILDTOOLSP/aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
+		"$BUILDTOOLSDIR"aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
 				-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
-				-S $PROJECTDIR/res -I $SDK
+				-S $PROJECTDIR/res -I $SDKDIR
 				 
 		# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
 		# this at once with command above - subject for research...
 		cd $PROJECTDIR/output
-		$BUILDTOOLSP/aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
+		"$BUILDTOOLSDIR"aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
 		cd $PROJECTDIR
 		
-		###################################### SIGNING ##################################################
-		# Sign APK, it's a MUST if you wanna install on phone!!!
-		# Changed apksigner to jarsigner on PC/Pi to get apk's installed in > Android 6 devices!
-		# If working with Android/TERMUX, only TERMUX apksigner is used.
-		# It makes keystore generation, signing and aligning in one turn!
+		#-------------------------- SIGNING -------------------------------
+		# Signing the apk is a MUST to get it installed on phone!!!
 
 		echo
 		echo "=> Signing and aligning APK..."
@@ -264,11 +158,11 @@ while [ "$key" != "q" ]; do
 					  -keyalg RSA -keysize 2048
 
 		  # apksigner for Linux and Android differ in their parameters!
-		  $BUILDTOOLSP/apksigner sign --ks-pass pass:debug-test --ks $PROJECTDIR/$APPNAME.keystore \
+		  "$BUILDTOOLSDIR"apksigner sign --ks-pass pass:debug-test --ks $PROJECTDIR/$APPNAME.keystore \
 			$PROJECTDIR/output/$APKNAME.apk \
 		
 		else  # $HOSTNAME = "Android"
-		   $BUILDTOOLSP/apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
+		   $BUILDTOOLSDIR/apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
 			$PROJECTDIR/output/$APKNAME.unaligned.apk \
 			$PROJECTDIR/output/$APKNAME.apk
 			
@@ -278,11 +172,9 @@ while [ "$key" != "q" ]; do
 
 	BUILDZEIT=$(date +%s)
 
-	##########################################################################
-	################ Start at last if selected to do so ######################
-	##########################################################################
+	#--- Start at last if selected to do so and adb tools are installed ---
 
-	# Configure install and run commands
+	# Configure install/run commands of adb tools
 
 	if [ $HOSTNAME != "Android" ];then
 		UNINSTALL="adb uninstall"
@@ -298,7 +190,7 @@ while [ "$key" != "q" ]; do
 
 	case $ITEM in
 
-		"$APPNAME-New_with_test_on_device")
+		"Test $APPNAME on device")
 			echo
 			echo "=> Removing previous App installed..."
 			$UNINSTALL $PACKAGENAME.$APPNAME
@@ -308,7 +200,7 @@ while [ "$key" != "q" ]; do
 			$RUN $PACKAGENAME.$APPNAME/.MainActivity
 			;;
 			
-		"$APPNAME-New_with_test_on_device_with_LogCat")
+		"Build $APPNAME with test on device with LogCat")
 			echo
 			echo "=> Removing previous App installed..."
 			$UNINSTALL $PACKAGENAME.$APPNAME
@@ -319,10 +211,10 @@ while [ "$key" != "q" ]; do
 			PID=$(adb jdwp)
 			echo "App Process-ID: $PID"
 			#adb logcat > logcat.txt
-			  adb logcat
+			 adb logcat
 			;;
 			
-		"$APPNAME-Run-without-compile")
+		"Run $APPNAME without build")
 			$STOP $PACKAGENAME.$APPNAME
 			$RUN $PACKAGENAME.$APPNAME/.MainActivity
 			;;
@@ -347,4 +239,3 @@ while [ "$key" != "q" ]; do
 	echo  "Working on $APPNAME FINISHED! *"
 	echo
 done
-
