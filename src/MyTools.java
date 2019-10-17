@@ -23,7 +23,7 @@ import java.util.Locale;
 import android.hardware.camera2.*;
 import android.util.DisplayMetrics;
 import android.view.Display;
-
+import android.os.StatFs; // for getting total amount of bytes on device! From API 18 upwards
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -423,6 +423,7 @@ public class MyTools {
 
     } // of getInternalStorage(int choice)
 
+	
     /** Read size of external storage **************************************************************
      *
      * @param choice defines type of storage
@@ -437,7 +438,11 @@ public class MyTools {
             && ( MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk1").equals("null") )){
             value = 0;
         } else {*/
+        
+        boolean SDcard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
 
+		if ( SDcard ) {
+			// get FULL path to external storage to stat
             StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getAbsolutePath());
             if (Build.VERSION.SDK_INT > 20) {
 
@@ -471,6 +476,9 @@ public class MyTools {
                         break;
                 } // of switch+ "\n Available: " +  MyTools.calcAmount(availableInternalStorage)
             } // if (Build.VERSION.SDK_INT > 20)... else...
+		} else {
+			value = 0;
+		}
 
         //}
 
@@ -520,12 +528,17 @@ public class MyTools {
         
         return value - getInternalStorage(1);
 */
-		cmdLine = MyTools.getPipedCmdLine("df |grep /system");
-        inString = cmdLine.trim().split("\\s+");
-        value = Long.parseLong(inString[2]) * 1024;
-		return value - getInternalStorage(1);
-
- 
+		if (Build.VERSION.SDK_INT < 28) { // approach for SDK < 28
+			cmdLine = MyTools.getPipedCmdLine("df |grep /system");
+			inString = cmdLine.trim().split("\\s+");
+			value = Long.parseLong(inString[2]) * 1024;
+			return value - getInternalStorage(1);
+		} else { // approach for SDK > 27
+			cmdLine = MyTools.getPipedCmdLine("df |grep /dev/root");
+			inString = cmdLine.trim().split("\\s+");
+			value = Long.parseLong(inString[2]) * 1024;
+			return value - getInternalStorage(1);
+		}
 
     } // of getAndroidSystemStorage()
 

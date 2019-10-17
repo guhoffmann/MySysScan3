@@ -13,7 +13,9 @@
 ###########################################################################
 
 SCRIPTNAME="build 19.08.31-2"
-. ./build.cfg # Include configurations
+. ./android.cfg # Include configurations
+
+export PATH=$PATH:$BUILDTOOLSDIR
 
 clear
 
@@ -28,7 +30,7 @@ CLEANFUNC="
 # Now go on and select what to do...
 
 # construct the menu according to system (Android or Linux system)
-HOSTNAME=$(cat /etc/hostname)
+HOSTNAME=$(uname -o)
 if [ $HOSTNAME != "Android" ];then
    MENU="Build $APPNAME|Test $APPNAME on device|Build $APPNAME with test on device with LogCat|Run $APPNAME without build|Clean project dir $APPNAME"
 else
@@ -54,7 +56,7 @@ while [ "$key" != "q" ]; do
 	# Print Menu and wait for keypress
 	echo $MENU | awk -F '|' '{ for(i=1;i<=NF;i++) print i") "$i }'
 	echo
-	read -p "q) Ende" -N1 key
+	read -p "q) Ende" key
 	# store selection in ITEM
 	ITEM=$(echo $key"|"$MENU|awk -F '|' '{ print $(1+$1)}')
 
@@ -107,8 +109,8 @@ while [ "$key" != "q" ]; do
 		# Make a dex file
 		echo
 		echo "=> Making Dex..."
-	 
-		if [ $HOSTNAME != "Android" ];then
+
+		if [ "$HOSTNAME" != "Android" ];then
 			"$BUILDTOOLSDIR"dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 		else
 			dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
@@ -126,14 +128,26 @@ while [ "$key" != "q" ]; do
 		echo "=> Making unsigned APK..."
 		
 		# First add resources to unaligned apk
-		"$BUILDTOOLSDIR"aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
-				-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
-				-S $PROJECTDIR/res -I $SDKDIR
+		if [ $HOSTNAME != "Android" ];then
+			"$BUILDTOOLSDIR"aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
+					-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
+					-S $PROJECTDIR/res -I $SDKDIR
+			# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
+			# this at once with command above - subject for research...
+			cd $PROJECTDIR/output
+			"$BUILDTOOLSDIR"aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
+
+		else
+			aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
+					-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
+					-S $PROJECTDIR/res -I $SDKDIR
+			# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
+			# this at once with command above - subject for research...
+			cd $PROJECTDIR/output
+			aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
+
+		fi
 				 
-		# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
-		# this at once with command above - subject for research...
-		cd $PROJECTDIR/output
-		"$BUILDTOOLSDIR"aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
 		cd $PROJECTDIR
 		
 		#-------------------------- SIGNING -------------------------------
@@ -162,9 +176,9 @@ while [ "$key" != "q" ]; do
 			$PROJECTDIR/output/$APKNAME.apk \
 		
 		else  # $HOSTNAME = "Android"
-		   $BUILDTOOLSDIR/apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
-			$PROJECTDIR/output/$APKNAME.unaligned.apk \
-			$PROJECTDIR/output/$APKNAME.apk
+		   apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
+			$PROJECTDIR/output/$APKNAME.apk \
+			$PROJECTDIR/output/$APKNAME-finished.apk
 			
 		fi # of if [ $HOSTNAME != "Android" ]
 

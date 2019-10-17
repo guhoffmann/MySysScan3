@@ -335,7 +335,7 @@ public class MainActivity extends Activity {
        super.onCreateOptionsMenu(menu);
        MenuInflater inflater = getMenuInflater();
        inflater.inflate(R.menu.menu_options, menu);
-        return true;
+       return true;
     }
 
     // Create callbacks for options menu items
@@ -376,7 +376,7 @@ public class MainActivity extends Activity {
         // get JSON-Object containing the SOC infos
         socObject = MyTools.parseJSONData(this, "soc.json");
 
-        /* ******************************************************
+        /********************************************************
 
 			 determine if we got an emulator or real device!
 
