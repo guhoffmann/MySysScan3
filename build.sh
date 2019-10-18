@@ -86,7 +86,7 @@ while [ "$key" != "q" ]; do
 			  mkdir $PROJECTDIR/output
 		fi
 
-		# compile all resources in projects res dir to R.java
+		# compile resources in res dir to R.java
 		# for accessing ressources from Java source code
 		echo
 		echo "=> Creating R.java..."
@@ -106,16 +106,11 @@ while [ "$key" != "q" ]; do
 		echo
 		echo "=> Making Dex..."
 
-		if [ "$HOSTNAME" != "Android" ];then
-			"$BUILDTOOLSDIR"dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
-		else
-			dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
-		fi
+		"$BUILDTOOLSDIR"dx --dex --output=$PROJECTDIR/output/classes.dex $PROJECTDIR/obj
 
-		# If error UNEXPECTED TOP-LEVEL EXCEPTION occurs, the cause can be
-		# old build tools and dalvik-exchange trying to translate java 1.7
-		# rather than 1.8. To solve this problem, specify use of 1.7 java
-		# version in the previous javac command:
+		# If error UNEXPECTED TOP-LEVEL EXCEPTION occurs, the cause can be old build
+		# tools and dalvik-exchange trying to translate java 1.7 rather than 1.8.
+		# Solution: specify use of 1.7 java  version in the $JAVAC command:
 		# 'javac -d obj -source 1.7 -target 1.7 ...'
 
 		#--------------------- Put everything in an APK -------------------
@@ -124,26 +119,13 @@ while [ "$key" != "q" ]; do
 		echo "=> Making unsigned APK..."
 		
 		# First add resources to unaligned apk
-		if [ $HOSTNAME != "Android" ];then
-			"$BUILDTOOLSDIR"aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
-					-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
-					-S $PROJECTDIR/res -I $SDKDIR
-			# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
-			# this at once with command above - subject for research...
-			cd $PROJECTDIR/output
-			"$BUILDTOOLSDIR"aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
-
-		else
-			aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
-					-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
-					-S $PROJECTDIR/res -I $SDKDIR
-			# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
-			# this at once with command above - subject for research...
-			cd $PROJECTDIR/output
-			aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
-
-		fi
-				 
+		"$BUILDTOOLSDIR"aapt package -f -m -F $PROJECTDIR/output/$APKNAME.apk \
+			-A $PROJECTDIR/assets -M $PROJECTDIR/AndroidManifest.xml \
+			-S $PROJECTDIR/res -I $SDKDIR
+		# Now add DEX file to unaligned apk - don't know why I couldn't accomplish
+		# this at once with command above - subject for research...
+		cd $PROJECTDIR/output
+		"$BUILDTOOLSDIR"aapt add $PROJECTDIR/output/$APKNAME.apk classes.dex
 		cd $PROJECTDIR
 		
 		#-------------------------- SIGNING -------------------------------
@@ -173,9 +155,10 @@ while [ "$key" != "q" ]; do
 		
 		else  # $HOSTNAME = "Android"
 		   apksigner -p debug-test $PROJECTDIR/$APPNAME.keystore \
-			$PROJECTDIR/output/$APKNAME.apk \
-			$PROJECTDIR/output/$APKNAME-finished.apk
-			
+			$PROJECTDIR/output/$APKNAME.apk $PROJECTDIR/output/$APKNAME-tmp.apk
+			rm $PROJECTDIR/output/$APKNAME.apk
+			mv $PROJECTDIR/output/$APKNAME-tmp.apk	$PROJECTDIR/output/$APKNAME.apk
+
 		fi # of if [ $HOSTNAME != "Android" ]
 
 	fi # of if [ $ITEM != "$APPNAME-Run-without-compile" ]..
