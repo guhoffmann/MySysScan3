@@ -423,9 +423,11 @@ public class MyTools {
 
     } // of getInternalStorage(int choice)
 
+    /** check if external storage is inserted ******************************************************
+     */
 
 	public static boolean hasExternalStorage() {
-
+   
 		Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
 		Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
 
@@ -444,7 +446,7 @@ public class MyTools {
 
     public static long getExternalStorage(int choice) {
 
-        long value;
+		long value;
 
        /* if ( (MyTools.getPipedCmdLine("df|grep sdcard").equals("null") )
             && ( MyTools.getPipedCmdLine("cat /proc/partitions|grep -w mmcblk1").equals("null") )){
