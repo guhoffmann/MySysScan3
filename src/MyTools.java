@@ -423,7 +423,19 @@ public class MyTools {
 
     } // of getInternalStorage(int choice)
 
-	
+
+	public static boolean hasExternalStorage() {
+
+		Boolean isSDPresent = android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+		Boolean isSDSupportedDevice = Environment.isExternalStorageRemovable();
+
+		if(isSDSupportedDevice && isSDPresent) {
+			return true;  // yes SD-card is present
+		} else {
+			return false; // Sorry
+		}
+	}
+
     /** Read size of external storage **************************************************************
      *
      * @param choice defines type of storage
@@ -439,7 +451,8 @@ public class MyTools {
             value = 0;
         } else {*/
         
-        boolean SDcard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+      //  boolean SDcard = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+		boolean SDcard = hasExternalStorage();
 
 		if ( SDcard ) {
 			// get FULL path to external storage to stat
