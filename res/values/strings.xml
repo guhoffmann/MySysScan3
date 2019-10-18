@@ -2,8 +2,8 @@
 
 <resources>
     <string name="action_settings">Settings</string>
-    <string name="app_fullname">MySys Scan3 19.10.14 Beta PuppyBuild</string>
-    <string name="app_version">19.10.14 PuppyBuild</string>
+    <string name="app_fullname">MySys Scan3 19.10.18 Beta AndroidBuild</string>
+    <string name="app_version">19.10.18 Beta AndroidBuild</string>
     <string name="app_name">Scan3</string>
     <string name="author">Gert-Uwe Hoffmann</string>
     <string name="device">device</string>

@@ -7,12 +7,12 @@
 # You only need to have installed:
 #
 # - 'android.jar' of the desired Android platform (=SDKDIR)
-# - build tools: 'aapt', 'apksigner'
+# - build tools: 'aapt', 'apksigner', 'dx' (java .class to .dex compiler)
 # - java compiler 'javac' ('ecj' for Android platforms)
 #
 ###########################################################################
 
-SCRIPTNAME="build 19.08.31-2"
+SCRIPTNAME="build 19.10.18-1"
 . ./android.cfg # Include configurations
 
 export PATH=$PATH:$BUILDTOOLSDIR
@@ -34,14 +34,11 @@ HOSTNAME=$(uname -o)
 if [ $HOSTNAME != "Android" ];then
    MENU="Build $APPNAME|Test $APPNAME on device|Build $APPNAME with test on device with LogCat|Run $APPNAME without build|Clean project dir $APPNAME"
 else
-   MENU="$APPNAME-New \
-         $APPNAME-Run-without-compile \
-         $APPNAME-Clean \
-         Abbruch"
+   MENU="Build $APPNAME|Run $APPNAME without build|Clean project dir $APPNAME"
 fi
 
 #==========================================================================
-# Display menu and wait for action to be selected with a keypress.
+# Display menu and wait for action to be selected with a key.
 # This is repeated until 'q' is pressed to quit the script!
 #==========================================================================
 
@@ -55,8 +52,8 @@ while [ "$key" != "q" ]; do
 
 	# Print Menu and wait for keypress
 	echo $MENU | awk -F '|' '{ for(i=1;i<=NF;i++) print i") "$i }'
-	echo
-	read -p "q) Ende" key
+	echo "q) Ende"
+	read -p "-> " key
 	# store selection in ITEM
 	ITEM=$(echo $key"|"$MENU|awk -F '|' '{ print $(1+$1)}')
 
@@ -74,7 +71,6 @@ while [ "$key" != "q" ]; do
 			echo "Project cleaned!"
 			;;
 	esac
-
 	clear
 
 	#--------------------- Compile and create app -------------------------
@@ -82,7 +78,7 @@ while [ "$key" != "q" ]; do
 	if [ "$ITEM" != "Run $APPNAME without build" ]\
 		&& [ "$ITEM" != "Clean project dir $APPNAME" ]; then
 
-		STARTZEIT=$(date +%s)
+		STARTTIME=$(date +%s)
 		
 		# Create output dir if not present
 		
@@ -104,7 +100,7 @@ while [ "$key" != "q" ]; do
 			  $PROJECTDIR/src/*.java 2>&1|grep -E '^|WARNING|ERROR'
 
 
-		COMPILEZEIT=$(date +%s)
+		COMPILETIME=$(date +%s)
 
 		# Make a dex file
 		echo
@@ -184,7 +180,7 @@ while [ "$key" != "q" ]; do
 
 	fi # of if [ $ITEM != "$APPNAME-Run-without-compile" ]..
 
-	BUILDZEIT=$(date +%s)
+	BUILDTIME=$(date +%s)
 
 	#--- Start at last if selected to do so and adb tools are installed ---
 
@@ -234,11 +230,11 @@ while [ "$key" != "q" ]; do
 			;;
 	esac
 
-	ENDZEIT=$(date +%s)
+	ENDTIME=$(date +%s)
 	echo
-	echo "Time spent: "$(echo $COMPILEZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for compiling."
-	echo $(echo $BUILDZEIT " " $COMPILEZEIT | awk '{print($1-$2)}')" seconds for creating & signing apk."
-	echo $(echo $ENDZEIT " " $STARTZEIT | awk '{print($1-$2)}')" seconds for whole build process."
+	echo "Time spent: "$(echo $COMPILETIME " " $STARTTIME | awk '{print($1-$2)}')" seconds for compiling."
+	echo $(echo $BUILDTIME " " $COMPILETIME | awk '{print($1-$2)}')" seconds for creating & signing apk."
+	echo $(echo $ENDTIME " " $STARTTIME | awk '{print($1-$2)}')" seconds for whole build process."
 	echo
 	if [ -f $PROJECTDIR/output/$APKNAME.apk ]; then
 		echo "Check file:"
