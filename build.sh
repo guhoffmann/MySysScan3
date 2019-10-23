@@ -34,9 +34,6 @@ SCRIPTNAME="build 19.10.23-1"
 
 export PATH=$PATH:$BUILDTOOLSDIR
 
-clear
-
-# 'function' for cleaning project
 CLEANFUNC="
 	rm $PROJECTDIR/output/*.*; \
 	rm -r $PROJECTDIR/obj/*; \
