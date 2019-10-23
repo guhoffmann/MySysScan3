@@ -12,7 +12,24 @@
 #
 ###########################################################################
 
-SCRIPTNAME="build 19.10.18-1"
+DATE=$(date "+%y.%m.%d")
+MACHINE=$(uname -mo)
+STRINGS_XML="<?xml version=\"1.0\" encoding=\"utf-8\"?>
+
+<resources>
+    <string name=\"action_settings\">Settings</string>
+    <string name=\"app_fullname\">MySys Scan3 $DATE built on $MACHINE</string>
+    <string name=\"app_version\">$DATE built on $MACHINE</string>
+    <string name=\"app_name\">Scan3</string>
+    <string name=\"author\">Gert-Uwe Hoffmann</string>
+    <string name=\"device\">device</string>
+    <string name=\"main_app\">MySys Scan3</string>
+</resources>
+"
+
+echo "$STRINGS_XML" >res/values/strings.xml
+
+SCRIPTNAME="build 19.10.23-1"
 . ./android.cfg # Include configurations
 
 export PATH=$PATH:$BUILDTOOLSDIR
